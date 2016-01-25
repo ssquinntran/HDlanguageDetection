@@ -31,6 +31,7 @@ fread1.close()
 search_words = ["foot"]#, "consider", "vanish", "the", "birthday", "she", "lady"]
 lvl1_2 = np.add(lang_vectors[1], lang_vectors[2])
 lvl1_2_3 = np.add(lvl1_2, lang_vectors[3])
+lvl1_2_3_4 = np.add(lvl1_2_3, lang_vectors[4])
 qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 """
@@ -46,9 +47,16 @@ def clamp_alphabet_to_binary(alph_vecs):
             else:
                 letter_vec[i] = -1
 
-#def clamp(lang_vec, max, min):
+def clamp(lang_vec, Min, Max):
+    for i in range(0, len(lang_vec)):
+        for j in range(0, len(lang_vec[0])):
+            if lang_vec[i][j] > Max:
+                lang_vec[i][j] = Max
+            elif lang_vec[i][j] < Min:
+                lang_vec[i][j] = Min
+
 def clamp_to_binary(lang_vec, boundary):
-    print lang_vec
+    #print lang_vec
     for i in range(0, len(lang_vec)):
         for j in range(0, len(lang_vec[0])):
             if lang_vec[i][j] >= 0:
@@ -56,15 +64,18 @@ def clamp_to_binary(lang_vec, boundary):
             else:
                 lang_vec[i][j] = -1
 
+
 #returns a priority queue of most likely letter after prefix
 def predict(pref, length):
     ngram = lang_vectors[length+1]
-    #clamp the ngram. can clamp out of predict method
+    #clamp_to_binary(ngram, 0)
+    clamp(ngram, -27, 27)
+    #clamp(ngram, -10, 10)
     prefix = random_idx.id_vector(N, word[0:length], alph, RI_letters, ordered)
     sprefix = np.roll(prefix, 1)
     prefix_ngram = np.multiply(ngram, sprefix)
-    clamp_to_binary(prefix_ngram, 0)
-    print prefix_ngram
+    #clamp_to_binary(prefix_ngram, 0)
+    #print prefix_ngram
 
     q = Queue.PriorityQueue()
     
@@ -79,9 +90,9 @@ def predict(pref, length):
 
 if __name__ == "__main__":
     #f = open("letter_prediction_results.txt", "w")
-    #f = open("letter_prediction_results_clipped.txt", "w")
-    f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
-    clamp_alphabet_to_binary(RI_letters)
+    f = open("letter_prediction_results_clipped.txt", "w")
+    #f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
+    #clamp_alphabet_to_binary(RI_letters)
     for word in search_words:
         for i in range(0, len(word)-1):
             queue = predict(word[0:i+1], i+1)
