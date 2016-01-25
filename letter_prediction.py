@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import pickle
 import sys
 import Queue
+import lang_vec
 
 k = 5000
 N = 10000
@@ -18,19 +19,6 @@ ordered = 1
 #alph = 'abc' 
 alph = string.lowercase + ' '
 
-# create language vector for Alice in Wonderland made of summed n-gram vectors for each
-# n in cluster_sizes
-def create_lang_vec(cluster_sizes, N=N, k=k):
-    
-    total_lang = np.zeros((1,N))
-    # generate english vector
-    for cz in cluster_sizes:
-        print "generating language vector of cluster size", cz
-        # which alphabet to use
-        lang_vector = random_idx.generate_RI_text_fast(N, RI_letters, cz, ordered, "preprocessed_texts/AliceInWonderland.txt", alph)
-        total_lang += lang_vector
-    return total_lang
-
 #read from serialized files
 fread = open("alice_RI_letters", "r")
 fread1 = open("alice_lang_vectors", "r")
@@ -38,6 +26,7 @@ RI_letters = pickle.load(fread)
 lang_vectors = pickle.load(fread1)
 fread.close()
 fread1.close()
+
 
 search_words = ["foot"]#, "consider", "vanish", "the", "birthday", "she", "lady"]
 lvl1_2 = np.add(lang_vectors[1], lang_vectors[2])
@@ -49,28 +38,34 @@ Clipping basically means limiting or saturating the max/min value of each elemen
 You can use a function like below to limit the max/min value of each element: n is the input value, and bitWidth is the number of bits that can be used to represent each element (bitWidth of 1 makes the vector as a binary vector). 
 
 """
-def clamp(n, bitWidth):
-    if bitWidth == 1:
-        if n > 0:
-            return 1
-        else:
-            return 0
-    else:
-        maxn = pow(2, bitWidth-1)-1
-        minn = -1 * pow(2, bitWidth-1)
-        return max(min(maxn, n), minn)
+def clamp_alphabet(alph_vecs):
+    for letter_vec in RI_letters:
+        for i in range(0, len(letter_vec)):
+            if letter_vec[i] >= 0:
+                letter_vec[i] = 1
+            else:
+                letter_vec[i] = -1
+
+#def clamp(lang_vec, max, min):
+def clamp_to_binary(lang_vec, boundary):
+    print lang_vec
+    for i in range(0, len(lang_vec)):
+        for j in range(0, len(lang_vec[0])):
+            if lang_vec[i][j] >= 0:
+                lang_vec[i][j] = 1
+            else:
+                lang_vec[i][j] = -1
 
 #returns a priority queue of most likely letter after prefix
 def predict(pref, length):
     ngram = lang_vectors[length+1]
     #clamp the ngram. can clamp out of predict method
-    #for n in ngram:
-    #    for num in n:
-    #        print n
-    #        print ""
     prefix = random_idx.id_vector(N, word[0:length], alph, RI_letters, ordered)
     sprefix = np.roll(prefix, 1)
     prefix_ngram = np.multiply(ngram, sprefix)
+    clamp_to_binary(prefix_ngram, 0)
+    print prefix_ngram
+
     q = Queue.PriorityQueue()
     
     for i in range(26):
@@ -83,7 +78,10 @@ def predict(pref, length):
     return q
 
 if __name__ == "__main__":
-    f = open("letter_prediction_results_clipped.txt", "w")
+    #f = open("letter_prediction_results.txt", "w")
+    #f = open("letter_prediction_results_clipped.txt", "w")
+    f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
+    clamp_alphabet(RI_letters)
     for word in search_words:
         for i in range(0, len(word)-1):
             queue = predict(word[0:i+1], i+1)
@@ -95,7 +93,8 @@ if __name__ == "__main__":
 
 
 
-
+#tried clamping only the language vector. results less accurate
+#tried clamping RI_letters as well
 
 
 
