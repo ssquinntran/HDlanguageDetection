@@ -38,7 +38,7 @@ Clipping basically means limiting or saturating the max/min value of each elemen
 You can use a function like below to limit the max/min value of each element: n is the input value, and bitWidth is the number of bits that can be used to represent each element (bitWidth of 1 makes the vector as a binary vector). 
 
 """
-def clamp_alphabet(alph_vecs):
+def clamp_alphabet_to_binary(alph_vecs):
     for letter_vec in RI_letters:
         for i in range(0, len(letter_vec)):
             if letter_vec[i] >= 0:
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     #f = open("letter_prediction_results.txt", "w")
     #f = open("letter_prediction_results_clipped.txt", "w")
     f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
-    clamp_alphabet(RI_letters)
+    clamp_alphabet_to_binary(RI_letters)
     for word in search_words:
         for i in range(0, len(word)-1):
             queue = predict(word[0:i+1], i+1)
