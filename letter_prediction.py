@@ -19,13 +19,12 @@ ordered = 1
 #alph = 'abc' 
 alph = string.lowercase + ' '
 
-#read from serialized files
-fread = open("alice_RI_letters", "r")
-fread1 = open("alice_lang_vectors", "r")
-RI_letters = pickle.load(fread)
-lang_vectors = pickle.load(fread1)
-fread.close()
-fread1.close()
+RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
+# lang_vectors in sizes 1-8
+lang_vectors = []
+for size in cluster_sizes:
+    lang_vectors.append(lang_vec.create_lang_vec([size]))
+lang_vectors.insert(0, np.zeros((1,N)))
 
 
 search_words = ["foot"]#, "consider", "vanish", "the", "birthday", "she", "lady"]
