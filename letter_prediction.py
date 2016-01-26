@@ -29,10 +29,14 @@ fread1.close()
 
 
 search_words = ["foot"]#, "consider", "vanish", "the", "birthday", "she", "lady"]
+added_lvls = [lang_vectors[1]]
 lvl1_2 = np.add(lang_vectors[1], lang_vectors[2])
 lvl1_2_3 = np.add(lvl1_2, lang_vectors[3])
 lvl1_2_3_4 = np.add(lvl1_2_3, lang_vectors[4])
-qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
+added_lvls.append(lvl1_2)
+added_lvls.append(lvl1_2_3)
+added_lvls.append(lvl1_2_3_4)
+
 
 """
 Clipping basically means limiting or saturating the max/min value of each element in a vector. In other words, we want to reduce the precision of vector. 
@@ -66,10 +70,10 @@ def clamp_to_binary(lang_vec, boundary):
 
 
 #returns a priority queue of most likely letter after prefix
-def predict(pref, length):
-    ngram = lang_vectors[length+1]
+def predict(pref, length, lang_vec):
+    ngram = lang_vec
     #clamp_to_binary(ngram, 0)
-    clamp(ngram, -27, 27)
+    #clamp(ngram, -27, 27)
     #clamp(ngram, -10, 10)
     prefix = random_idx.id_vector(N, word[0:length], alph, RI_letters, ordered)
     sprefix = np.roll(prefix, 1)
@@ -90,12 +94,13 @@ def predict(pref, length):
 
 if __name__ == "__main__":
     #f = open("letter_prediction_results.txt", "w")
-    f = open("letter_prediction_results_clipped.txt", "w")
+    f = open("letter_prediction_results_added.txt", "w")
+    #f = open("letter_prediction_results_clipped.txt", "w")
     #f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
     #clamp_alphabet_to_binary(RI_letters)
     for word in search_words:
         for i in range(0, len(word)-1):
-            queue = predict(word[0:i+1], i+1)
+            queue = predict(word[0:i+1], i+1, added_lvls[i+1])
             while not queue.empty():
                 tpl = queue.get()
                 f.write("dot product of %d-gram*s%s vector and %s letter vector is %d\n\n" % (tpl[2], tpl[3], tpl[4], tpl[1]))
