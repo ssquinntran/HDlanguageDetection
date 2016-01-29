@@ -1,312 +1,312 @@
-dot product of 2-gram*sf vector and n letter vector is 186
+dot product of 0-gram*sfoo vector and u letter vector is 11525248
 
-dot product of 2-gram*sf vector and i letter vector is 182
+dot product of 0-gram*sfoo vector and r letter vector is 8352856
 
-dot product of 2-gram*sf vector and e letter vector is 130
+dot product of 0-gram*sfoo vector and w letter vector is 7051588
 
-dot product of 2-gram*sf vector and u letter vector is 114
+dot product of 0-gram*sfoo vector and g letter vector is 3954316
 
-dot product of 2-gram*sf vector and q letter vector is 106
+dot product of 0-gram*sfoo vector and m letter vector is 3627024
 
-dot product of 2-gram*sf vector and l letter vector is 102
+dot product of 0-gram*sfoo vector and b letter vector is 3133480
 
-dot product of 2-gram*sf vector and f letter vector is 78
+dot product of 0-gram*sfoo vector and d letter vector is 2853160
 
-dot product of 2-gram*sf vector and t letter vector is 78
+dot product of 0-gram*sfoo vector and y letter vector is 2772588
 
-dot product of 2-gram*sf vector and s letter vector is 46
+dot product of 0-gram*sfoo vector and f letter vector is 2735776
 
-dot product of 2-gram*sf vector and w letter vector is 22
+dot product of 0-gram*sfoo vector and t letter vector is 1681908
 
-dot product of 2-gram*sf vector and h letter vector is -2
+dot product of 0-gram*sfoo vector and c letter vector is 1069548
 
-dot product of 2-gram*sf vector and m letter vector is -6
+dot product of 0-gram*sfoo vector and h letter vector is -398616
 
-dot product of 2-gram*sf vector and v letter vector is -6
+dot product of 0-gram*sfoo vector and q letter vector is -573660
 
-dot product of 2-gram*sf vector and b letter vector is -10
+dot product of 0-gram*sfoo vector and z letter vector is -688592
 
-dot product of 2-gram*sf vector and o letter vector is -18
+dot product of 0-gram*sfoo vector and n letter vector is -727732
 
-dot product of 2-gram*sf vector and a letter vector is -22
+dot product of 0-gram*sfoo vector and v letter vector is -921040
 
-dot product of 2-gram*sf vector and r letter vector is -22
+dot product of 0-gram*sfoo vector and s letter vector is -3512948
 
-dot product of 2-gram*sf vector and y letter vector is -30
+dot product of 0-gram*sfoo vector and k letter vector is -3706320
 
-dot product of 2-gram*sf vector and x letter vector is -38
+dot product of 0-gram*sfoo vector and p letter vector is -3852824
 
-dot product of 2-gram*sf vector and z letter vector is -42
+dot product of 0-gram*sfoo vector and l letter vector is -4365468
 
-dot product of 2-gram*sf vector and j letter vector is -46
+dot product of 0-gram*sfoo vector and o letter vector is -6260084
 
-dot product of 2-gram*sf vector and p letter vector is -82
+dot product of 0-gram*sfoo vector and a letter vector is -6809268
 
-dot product of 2-gram*sf vector and d letter vector is -114
+dot product of 0-gram*sfoo vector and x letter vector is -7379404
 
-dot product of 2-gram*sf vector and c letter vector is -126
+dot product of 0-gram*sfoo vector and j letter vector is -8647924
 
-dot product of 2-gram*sf vector and g letter vector is -126
+dot product of 0-gram*sfoo vector and e letter vector is -11265832
 
-dot product of 2-gram*sf vector and k letter vector is -226
+dot product of 0-gram*sfoo vector and i letter vector is -11304676
 
-dot product of 3-gram*sfo vector and q letter vector is 292
+dot product of 0-gram*sfoo vector and u letter vector is 11525248
 
-dot product of 3-gram*sfo vector and f letter vector is 276
+dot product of 0-gram*sfoo vector and r letter vector is 8352856
 
-dot product of 3-gram*sfo vector and o letter vector is 128
+dot product of 0-gram*sfoo vector and w letter vector is 7051588
 
-dot product of 3-gram*sfo vector and a letter vector is 120
+dot product of 0-gram*sfoo vector and g letter vector is 3954316
 
-dot product of 3-gram*sfo vector and g letter vector is 120
+dot product of 0-gram*sfoo vector and m letter vector is 3627024
 
-dot product of 3-gram*sfo vector and u letter vector is 96
+dot product of 0-gram*sfoo vector and b letter vector is 3133480
 
-dot product of 3-gram*sfo vector and r letter vector is 92
+dot product of 0-gram*sfoo vector and d letter vector is 2853160
 
-dot product of 3-gram*sfo vector and b letter vector is 76
+dot product of 0-gram*sfoo vector and y letter vector is 2772588
 
-dot product of 3-gram*sfo vector and y letter vector is 72
+dot product of 0-gram*sfoo vector and f letter vector is 2735776
 
-dot product of 3-gram*sfo vector and n letter vector is 68
+dot product of 0-gram*sfoo vector and t letter vector is 1681908
 
-dot product of 3-gram*sfo vector and w letter vector is 68
+dot product of 0-gram*sfoo vector and c letter vector is 1069548
 
-dot product of 3-gram*sfo vector and e letter vector is 48
+dot product of 0-gram*sfoo vector and h letter vector is -398616
 
-dot product of 3-gram*sfo vector and z letter vector is 24
+dot product of 0-gram*sfoo vector and q letter vector is -573660
 
-dot product of 3-gram*sfo vector and k letter vector is 12
+dot product of 0-gram*sfoo vector and z letter vector is -688592
 
-dot product of 3-gram*sfo vector and d letter vector is 8
+dot product of 0-gram*sfoo vector and n letter vector is -727732
 
-dot product of 3-gram*sfo vector and p letter vector is 4
+dot product of 0-gram*sfoo vector and v letter vector is -921040
 
-dot product of 3-gram*sfo vector and v letter vector is -12
+dot product of 0-gram*sfoo vector and s letter vector is -3512948
 
-dot product of 3-gram*sfo vector and l letter vector is -24
+dot product of 0-gram*sfoo vector and k letter vector is -3706320
 
-dot product of 3-gram*sfo vector and t letter vector is -40
+dot product of 0-gram*sfoo vector and p letter vector is -3852824
 
-dot product of 3-gram*sfo vector and x letter vector is -40
+dot product of 0-gram*sfoo vector and l letter vector is -4365468
 
-dot product of 3-gram*sfo vector and j letter vector is -44
+dot product of 0-gram*sfoo vector and o letter vector is -6260084
 
-dot product of 3-gram*sfo vector and m letter vector is -48
+dot product of 0-gram*sfoo vector and a letter vector is -6809268
 
-dot product of 3-gram*sfo vector and h letter vector is -124
+dot product of 0-gram*sfoo vector and x letter vector is -7379404
 
-dot product of 3-gram*sfo vector and s letter vector is -136
+dot product of 0-gram*sfoo vector and j letter vector is -8647924
 
-dot product of 3-gram*sfo vector and i letter vector is -172
+dot product of 0-gram*sfoo vector and e letter vector is -11265832
 
-dot product of 3-gram*sfo vector and c letter vector is -272
+dot product of 0-gram*sfoo vector and i letter vector is -11304676
 
-dot product of 4-gram*sfoo vector and o letter vector is 206
+dot product of 0-gram*sfoo vector and u letter vector is 11525248
 
-dot product of 4-gram*sfoo vector and a letter vector is 154
+dot product of 0-gram*sfoo vector and r letter vector is 8352856
 
-dot product of 4-gram*sfoo vector and g letter vector is 134
+dot product of 0-gram*sfoo vector and w letter vector is 7051588
 
-dot product of 4-gram*sfoo vector and i letter vector is 134
+dot product of 0-gram*sfoo vector and g letter vector is 3954316
 
-dot product of 4-gram*sfoo vector and d letter vector is 98
+dot product of 0-gram*sfoo vector and m letter vector is 3627024
 
-dot product of 4-gram*sfoo vector and r letter vector is 98
+dot product of 0-gram*sfoo vector and b letter vector is 3133480
 
-dot product of 4-gram*sfoo vector and n letter vector is 82
+dot product of 0-gram*sfoo vector and d letter vector is 2853160
 
-dot product of 4-gram*sfoo vector and w letter vector is 82
+dot product of 0-gram*sfoo vector and y letter vector is 2772588
 
-dot product of 4-gram*sfoo vector and e letter vector is 78
+dot product of 0-gram*sfoo vector and f letter vector is 2735776
 
-dot product of 4-gram*sfoo vector and h letter vector is 58
+dot product of 0-gram*sfoo vector and t letter vector is 1681908
 
-dot product of 4-gram*sfoo vector and u letter vector is 38
+dot product of 0-gram*sfoo vector and c letter vector is 1069548
 
-dot product of 4-gram*sfoo vector and l letter vector is 34
+dot product of 0-gram*sfoo vector and h letter vector is -398616
 
-dot product of 4-gram*sfoo vector and v letter vector is 18
+dot product of 0-gram*sfoo vector and q letter vector is -573660
 
-dot product of 4-gram*sfoo vector and b letter vector is -2
+dot product of 0-gram*sfoo vector and z letter vector is -688592
 
-dot product of 4-gram*sfoo vector and f letter vector is -6
+dot product of 0-gram*sfoo vector and n letter vector is -727732
 
-dot product of 4-gram*sfoo vector and t letter vector is -6
+dot product of 0-gram*sfoo vector and v letter vector is -921040
 
-dot product of 4-gram*sfoo vector and y letter vector is -18
+dot product of 0-gram*sfoo vector and s letter vector is -3512948
 
-dot product of 4-gram*sfoo vector and s letter vector is -30
+dot product of 0-gram*sfoo vector and k letter vector is -3706320
 
-dot product of 4-gram*sfoo vector and j letter vector is -54
+dot product of 0-gram*sfoo vector and p letter vector is -3852824
 
-dot product of 4-gram*sfoo vector and x letter vector is -54
+dot product of 0-gram*sfoo vector and l letter vector is -4365468
 
-dot product of 4-gram*sfoo vector and p letter vector is -78
+dot product of 0-gram*sfoo vector and o letter vector is -6260084
 
-dot product of 4-gram*sfoo vector and c letter vector is -86
+dot product of 0-gram*sfoo vector and a letter vector is -6809268
 
-dot product of 4-gram*sfoo vector and m letter vector is -98
+dot product of 0-gram*sfoo vector and x letter vector is -7379404
 
-dot product of 4-gram*sfoo vector and q letter vector is -134
+dot product of 0-gram*sfoo vector and j letter vector is -8647924
 
-dot product of 4-gram*sfoo vector and z letter vector is -146
+dot product of 0-gram*sfoo vector and e letter vector is -11265832
 
-dot product of 4-gram*sfoo vector and k letter vector is -170
+dot product of 0-gram*sfoo vector and i letter vector is -11304676
 
-dot product of 2-gram*sr vector and k letter vector is 114
+dot product of 0-gram*sfoo vector and u letter vector is 11525248
 
-dot product of 2-gram*sr vector and c letter vector is 90
+dot product of 0-gram*sfoo vector and r letter vector is 8352856
 
-dot product of 2-gram*sr vector and d letter vector is 86
+dot product of 0-gram*sfoo vector and w letter vector is 7051588
 
-dot product of 2-gram*sr vector and g letter vector is 50
+dot product of 0-gram*sfoo vector and g letter vector is 3954316
 
-dot product of 2-gram*sr vector and s letter vector is 38
+dot product of 0-gram*sfoo vector and m letter vector is 3627024
 
-dot product of 2-gram*sr vector and z letter vector is 34
+dot product of 0-gram*sfoo vector and b letter vector is 3133480
 
-dot product of 2-gram*sr vector and w letter vector is 18
+dot product of 0-gram*sfoo vector and d letter vector is 2853160
 
-dot product of 2-gram*sr vector and h letter vector is -2
+dot product of 0-gram*sfoo vector and y letter vector is 2772588
 
-dot product of 2-gram*sr vector and l letter vector is -18
+dot product of 0-gram*sfoo vector and f letter vector is 2735776
 
-dot product of 2-gram*sr vector and o letter vector is -26
+dot product of 0-gram*sfoo vector and t letter vector is 1681908
 
-dot product of 2-gram*sr vector and x letter vector is -26
+dot product of 0-gram*sfoo vector and c letter vector is 1069548
 
-dot product of 2-gram*sr vector and v letter vector is -34
+dot product of 0-gram*sfoo vector and h letter vector is -398616
 
-dot product of 2-gram*sr vector and f letter vector is -46
+dot product of 0-gram*sfoo vector and q letter vector is -573660
 
-dot product of 2-gram*sr vector and q letter vector is -50
+dot product of 0-gram*sfoo vector and z letter vector is -688592
 
-dot product of 2-gram*sr vector and u letter vector is -50
+dot product of 0-gram*sfoo vector and n letter vector is -727732
 
-dot product of 2-gram*sr vector and n letter vector is -54
+dot product of 0-gram*sfoo vector and v letter vector is -921040
 
-dot product of 2-gram*sr vector and j letter vector is -62
+dot product of 0-gram*sfoo vector and s letter vector is -3512948
 
-dot product of 2-gram*sr vector and t letter vector is -62
+dot product of 0-gram*sfoo vector and k letter vector is -3706320
 
-dot product of 2-gram*sr vector and e letter vector is -78
+dot product of 0-gram*sfoo vector and p letter vector is -3852824
 
-dot product of 2-gram*sr vector and m letter vector is -78
+dot product of 0-gram*sfoo vector and l letter vector is -4365468
 
-dot product of 2-gram*sr vector and i letter vector is -90
+dot product of 0-gram*sfoo vector and o letter vector is -6260084
 
-dot product of 2-gram*sr vector and r letter vector is -98
+dot product of 0-gram*sfoo vector and a letter vector is -6809268
 
-dot product of 2-gram*sr vector and p letter vector is -118
+dot product of 0-gram*sfoo vector and x letter vector is -7379404
 
-dot product of 2-gram*sr vector and y letter vector is -142
+dot product of 0-gram*sfoo vector and j letter vector is -8647924
 
-dot product of 2-gram*sr vector and b letter vector is -146
+dot product of 0-gram*sfoo vector and e letter vector is -11265832
 
-dot product of 2-gram*sr vector and a letter vector is -226
+dot product of 0-gram*sfoo vector and i letter vector is -11304676
 
-dot product of 3-gram*sru vector and u letter vector is 192
+dot product of 0-gram*sfoo vector and u letter vector is 11525248
 
-dot product of 3-gram*sru vector and r letter vector is 184
+dot product of 0-gram*sfoo vector and r letter vector is 8352856
 
-dot product of 3-gram*sru vector and m letter vector is 136
+dot product of 0-gram*sfoo vector and w letter vector is 7051588
 
-dot product of 3-gram*sru vector and f letter vector is 132
+dot product of 0-gram*sfoo vector and g letter vector is 3954316
 
-dot product of 3-gram*sru vector and z letter vector is 124
+dot product of 0-gram*sfoo vector and m letter vector is 3627024
 
-dot product of 3-gram*sru vector and e letter vector is 120
+dot product of 0-gram*sfoo vector and b letter vector is 3133480
 
-dot product of 3-gram*sru vector and p letter vector is 104
+dot product of 0-gram*sfoo vector and d letter vector is 2853160
 
-dot product of 3-gram*sru vector and o letter vector is 88
+dot product of 0-gram*sfoo vector and y letter vector is 2772588
 
-dot product of 3-gram*sru vector and q letter vector is 88
+dot product of 0-gram*sfoo vector and f letter vector is 2735776
 
-dot product of 3-gram*sru vector and n letter vector is 68
+dot product of 0-gram*sfoo vector and t letter vector is 1681908
 
-dot product of 3-gram*sru vector and h letter vector is 44
+dot product of 0-gram*sfoo vector and c letter vector is 1069548
 
-dot product of 3-gram*sru vector and a letter vector is 40
+dot product of 0-gram*sfoo vector and h letter vector is -398616
 
-dot product of 3-gram*sru vector and w letter vector is 20
+dot product of 0-gram*sfoo vector and q letter vector is -573660
 
-dot product of 3-gram*sru vector and v letter vector is 16
+dot product of 0-gram*sfoo vector and z letter vector is -688592
 
-dot product of 3-gram*sru vector and t letter vector is -16
+dot product of 0-gram*sfoo vector and n letter vector is -727732
 
-dot product of 3-gram*sru vector and c letter vector is -48
+dot product of 0-gram*sfoo vector and v letter vector is -921040
 
-dot product of 3-gram*sru vector and i letter vector is -56
+dot product of 0-gram*sfoo vector and s letter vector is -3512948
 
-dot product of 3-gram*sru vector and j letter vector is -56
+dot product of 0-gram*sfoo vector and k letter vector is -3706320
 
-dot product of 3-gram*sru vector and s letter vector is -60
+dot product of 0-gram*sfoo vector and p letter vector is -3852824
 
-dot product of 3-gram*sru vector and l letter vector is -68
+dot product of 0-gram*sfoo vector and l letter vector is -4365468
 
-dot product of 3-gram*sru vector and g letter vector is -72
+dot product of 0-gram*sfoo vector and o letter vector is -6260084
 
-dot product of 3-gram*sru vector and y letter vector is -76
+dot product of 0-gram*sfoo vector and a letter vector is -6809268
 
-dot product of 3-gram*sru vector and d letter vector is -84
+dot product of 0-gram*sfoo vector and x letter vector is -7379404
 
-dot product of 3-gram*sru vector and b letter vector is -100
+dot product of 0-gram*sfoo vector and j letter vector is -8647924
 
-dot product of 3-gram*sru vector and x letter vector is -108
+dot product of 0-gram*sfoo vector and e letter vector is -11265832
 
-dot product of 3-gram*sru vector and k letter vector is -248
+dot product of 0-gram*sfoo vector and i letter vector is -11304676
 
-dot product of 4-gram*srun vector and b letter vector is 246
+dot product of 0-gram*sfoo vector and u letter vector is 11525248
 
-dot product of 4-gram*srun vector and z letter vector is 230
+dot product of 0-gram*sfoo vector and r letter vector is 8352856
 
-dot product of 4-gram*srun vector and k letter vector is 198
+dot product of 0-gram*sfoo vector and w letter vector is 7051588
 
-dot product of 4-gram*srun vector and i letter vector is 162
+dot product of 0-gram*sfoo vector and g letter vector is 3954316
 
-dot product of 4-gram*srun vector and t letter vector is 114
+dot product of 0-gram*sfoo vector and m letter vector is 3627024
 
-dot product of 4-gram*srun vector and p letter vector is 110
+dot product of 0-gram*sfoo vector and b letter vector is 3133480
 
-dot product of 4-gram*srun vector and g letter vector is 102
+dot product of 0-gram*sfoo vector and d letter vector is 2853160
 
-dot product of 4-gram*srun vector and a letter vector is 70
+dot product of 0-gram*sfoo vector and y letter vector is 2772588
 
-dot product of 4-gram*srun vector and c letter vector is 54
+dot product of 0-gram*sfoo vector and f letter vector is 2735776
 
-dot product of 4-gram*srun vector and y letter vector is 42
+dot product of 0-gram*sfoo vector and t letter vector is 1681908
 
-dot product of 4-gram*srun vector and o letter vector is 26
+dot product of 0-gram*sfoo vector and c letter vector is 1069548
 
-dot product of 4-gram*srun vector and w letter vector is 22
+dot product of 0-gram*sfoo vector and h letter vector is -398616
 
-dot product of 4-gram*srun vector and h letter vector is 18
+dot product of 0-gram*sfoo vector and q letter vector is -573660
 
-dot product of 4-gram*srun vector and m letter vector is 18
+dot product of 0-gram*sfoo vector and z letter vector is -688592
 
-dot product of 4-gram*srun vector and e letter vector is -26
+dot product of 0-gram*sfoo vector and n letter vector is -727732
 
-dot product of 4-gram*srun vector and j letter vector is -26
+dot product of 0-gram*sfoo vector and v letter vector is -921040
 
-dot product of 4-gram*srun vector and n letter vector is -46
+dot product of 0-gram*sfoo vector and s letter vector is -3512948
 
-dot product of 4-gram*srun vector and x letter vector is -46
+dot product of 0-gram*sfoo vector and k letter vector is -3706320
 
-dot product of 4-gram*srun vector and f letter vector is -50
+dot product of 0-gram*sfoo vector and p letter vector is -3852824
 
-dot product of 4-gram*srun vector and d letter vector is -54
+dot product of 0-gram*sfoo vector and l letter vector is -4365468
 
-dot product of 4-gram*srun vector and l letter vector is -78
+dot product of 0-gram*sfoo vector and o letter vector is -6260084
 
-dot product of 4-gram*srun vector and s letter vector is -82
+dot product of 0-gram*sfoo vector and a letter vector is -6809268
 
-dot product of 4-gram*srun vector and v letter vector is -102
+dot product of 0-gram*sfoo vector and x letter vector is -7379404
 
-dot product of 4-gram*srun vector and r letter vector is -110
+dot product of 0-gram*sfoo vector and j letter vector is -8647924
 
-dot product of 4-gram*srun vector and u letter vector is -118
+dot product of 0-gram*sfoo vector and e letter vector is -11265832
 
-dot product of 4-gram*srun vector and q letter vector is -138
+dot product of 0-gram*sfoo vector and i letter vector is -11304676
 

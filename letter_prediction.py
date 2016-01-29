@@ -21,20 +21,28 @@ alph = string.lowercase + ' '
 
 RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
 # lang_vectors in sizes 1-8
+
 lang_vectors = []
 for size in cluster_sizes:
     lang_vectors.append(lang_vec.create_lang_vec([size]))
 lang_vectors.insert(0, np.zeros((1,N)))
 
 
+# fread = open("alice_RI_letters", "r")
+# fread1 = open("alice_lang_vectors", "r")
+# RI_letters = pickle.load(fread)
+# lang_vectors = pickle.load(fread1)
+# fread.close()
+# fread1.close()
+
+
 search_words = ["foot", "runs"]#, "consider", "vanish", "the", "she", "lady"]
 added_lvls = [lang_vectors[1]]
-lvl1_2 = np.add(lang_vectors[1], lang_vectors[2])
-lvl1_2_3 = np.add(lvl1_2, lang_vectors[3])
-lvl1_2_3_4 = np.add(lvl1_2_3, lang_vectors[4])
-added_lvls.append(lvl1_2)
-added_lvls.append(lvl1_2_3)
-added_lvls.append(lvl1_2_3_4)
+added_lvls.append(lang_vectors[2])
+lvl2_3 = np.add(lang_vectors[2], lang_vectors[3])
+lvl2_3_4 = np.add(lvl2_3, lang_vectors[4])
+added_lvls.append(lvl2_3)
+added_lvls.append(lvl2_3_4)
 
 
 """
@@ -59,6 +67,28 @@ def clamp_to_binary(lang_vec, boundary):
                 lang_vec[i][j] = 1
             else:
                 lang_vec[i][j] = -1
+# predicts based on crossing with prefixes then dotting with each letter
+# lvl_n where n is len(prefix)+1
+#multiply Lv234 with r(O + OO + FOO)
+def predict2(lvl_n, pref):
+    v = ""
+    prefix = np.zeros((1, 10000))
+    for i in pref:
+        v = v+i
+        p = random_idx.id_vector(N, v, alph, RI_letters, ordered)
+        prefix = np.add(p,prefix)
+
+
+    sprefix = np.roll(prefix, 1);
+    t = np.multiply(lvl_n, sprefix)
+
+    q = Queue.PriorityQueue()
+
+    for i in range(26):
+        result = np.dot(t, RI_letters[i])
+        q.put((-result, result, len(pref)+1, pref, alph[i]))
+
+    return q
 
 
 #returns a priority queue of most likely letter after prefix
@@ -86,12 +116,14 @@ def predict(pref, length, lang_vec):
 if __name__ == "__main__":
     #f = open("letter_prediction_results.txt", "w")
     #f = open("letter_prediction_results_added.txt", "w")
-    f = open("letter_prediction_results_clipped_binary.txt", "w")
+    #f = open("letter_prediction_results_clipped_binary.txt", "w")
     #f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
-    #clamp_alphabet_to_binary(RI_letters)
+    f = open("letter_prediction_results_predict2.txt", "w")
     for word in search_words:
         for i in range(0, len(word)-1):
-            queue = predict(word[0:i+1], i+1, added_lvls[i+1])
+            #queue = predict(word[0:i+1], i+1, lang_vectors[i+1])
+            # queue = predict(word[0:i+1], i+1, added_lvls[i+1])
+            queue = predict2(added_lvls[i+1], word[0:i+1]);
             while not queue.empty():
                 tpl = queue.get()
                 f.write("dot product of %d-gram*s%s vector and %s letter vector is %d\n\n" % (tpl[2], tpl[3], tpl[4], tpl[1]))
