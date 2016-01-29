@@ -27,7 +27,7 @@ for size in cluster_sizes:
 lang_vectors.insert(0, np.zeros((1,N)))
 
 
-search_words = ["foot", "birthday"]#, "consider", "vanish", "the", "she", "lady"]
+search_words = ["foot", "runs"]#, "consider", "vanish", "the", "she", "lady"]
 added_lvls = [lang_vectors[1]]
 lvl1_2 = np.add(lang_vectors[1], lang_vectors[2])
 lvl1_2_3 = np.add(lvl1_2, lang_vectors[3])
