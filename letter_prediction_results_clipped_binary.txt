@@ -1,0 +1,364 @@
+dot product of 2-gram*sf vector and g letter vector is 158
+
+dot product of 2-gram*sf vector and c letter vector is 126
+
+dot product of 2-gram*sf vector and e letter vector is 102
+
+dot product of 2-gram*sf vector and m letter vector is 98
+
+dot product of 2-gram*sf vector and v letter vector is 86
+
+dot product of 2-gram*sf vector and t letter vector is 42
+
+dot product of 2-gram*sf vector and z letter vector is 18
+
+dot product of 2-gram*sf vector and h letter vector is 6
+
+dot product of 2-gram*sf vector and i letter vector is -14
+
+dot product of 2-gram*sf vector and u letter vector is -14
+
+dot product of 2-gram*sf vector and j letter vector is -26
+
+dot product of 2-gram*sf vector and b letter vector is -30
+
+dot product of 2-gram*sf vector and p letter vector is -30
+
+dot product of 2-gram*sf vector and k letter vector is -38
+
+dot product of 2-gram*sf vector and w letter vector is -38
+
+dot product of 2-gram*sf vector and o letter vector is -78
+
+dot product of 2-gram*sf vector and r letter vector is -78
+
+dot product of 2-gram*sf vector and a letter vector is -102
+
+dot product of 2-gram*sf vector and y letter vector is -106
+
+dot product of 2-gram*sf vector and f letter vector is -110
+
+dot product of 2-gram*sf vector and q letter vector is -114
+
+dot product of 2-gram*sf vector and s letter vector is -130
+
+dot product of 2-gram*sf vector and x letter vector is -134
+
+dot product of 2-gram*sf vector and n letter vector is -142
+
+dot product of 2-gram*sf vector and d letter vector is -150
+
+dot product of 2-gram*sf vector and l letter vector is -286
+
+dot product of 3-gram*sfo vector and s letter vector is 186
+
+dot product of 3-gram*sfo vector and o letter vector is 178
+
+dot product of 3-gram*sfo vector and y letter vector is 178
+
+dot product of 3-gram*sfo vector and t letter vector is 174
+
+dot product of 3-gram*sfo vector and q letter vector is 118
+
+dot product of 3-gram*sfo vector and z letter vector is 118
+
+dot product of 3-gram*sfo vector and i letter vector is 98
+
+dot product of 3-gram*sfo vector and c letter vector is 78
+
+dot product of 3-gram*sfo vector and v letter vector is 78
+
+dot product of 3-gram*sfo vector and n letter vector is 38
+
+dot product of 3-gram*sfo vector and m letter vector is 10
+
+dot product of 3-gram*sfo vector and k letter vector is 6
+
+dot product of 3-gram*sfo vector and r letter vector is 2
+
+dot product of 3-gram*sfo vector and h letter vector is -14
+
+dot product of 3-gram*sfo vector and w letter vector is -18
+
+dot product of 3-gram*sfo vector and l letter vector is -26
+
+dot product of 3-gram*sfo vector and e letter vector is -30
+
+dot product of 3-gram*sfo vector and d letter vector is -42
+
+dot product of 3-gram*sfo vector and p letter vector is -46
+
+dot product of 3-gram*sfo vector and g letter vector is -50
+
+dot product of 3-gram*sfo vector and b letter vector is -54
+
+dot product of 3-gram*sfo vector and u letter vector is -54
+
+dot product of 3-gram*sfo vector and x letter vector is -62
+
+dot product of 3-gram*sfo vector and a letter vector is -74
+
+dot product of 3-gram*sfo vector and j letter vector is -82
+
+dot product of 3-gram*sfo vector and f letter vector is -150
+
+dot product of 4-gram*sfoo vector and q letter vector is 160
+
+dot product of 4-gram*sfoo vector and s letter vector is 136
+
+dot product of 4-gram*sfoo vector and p letter vector is 116
+
+dot product of 4-gram*sfoo vector and d letter vector is 44
+
+dot product of 4-gram*sfoo vector and r letter vector is 24
+
+dot product of 4-gram*sfoo vector and z letter vector is 24
+
+dot product of 4-gram*sfoo vector and t letter vector is 8
+
+dot product of 4-gram*sfoo vector and j letter vector is -8
+
+dot product of 4-gram*sfoo vector and o letter vector is -20
+
+dot product of 4-gram*sfoo vector and x letter vector is -24
+
+dot product of 4-gram*sfoo vector and y letter vector is -24
+
+dot product of 4-gram*sfoo vector and f letter vector is -28
+
+dot product of 4-gram*sfoo vector and u letter vector is -28
+
+dot product of 4-gram*sfoo vector and k letter vector is -32
+
+dot product of 4-gram*sfoo vector and h letter vector is -40
+
+dot product of 4-gram*sfoo vector and b letter vector is -44
+
+dot product of 4-gram*sfoo vector and l letter vector is -56
+
+dot product of 4-gram*sfoo vector and i letter vector is -60
+
+dot product of 4-gram*sfoo vector and v letter vector is -68
+
+dot product of 4-gram*sfoo vector and g letter vector is -72
+
+dot product of 4-gram*sfoo vector and m letter vector is -84
+
+dot product of 4-gram*sfoo vector and c letter vector is -104
+
+dot product of 4-gram*sfoo vector and w letter vector is -152
+
+dot product of 4-gram*sfoo vector and a letter vector is -168
+
+dot product of 4-gram*sfoo vector and n letter vector is -168
+
+dot product of 4-gram*sfoo vector and e letter vector is -172
+
+dot product of 2-gram*sb vector and k letter vector is 242
+
+dot product of 2-gram*sb vector and f letter vector is 150
+
+dot product of 2-gram*sb vector and a letter vector is 146
+
+dot product of 2-gram*sb vector and r letter vector is 122
+
+dot product of 2-gram*sb vector and x letter vector is 94
+
+dot product of 2-gram*sb vector and h letter vector is 82
+
+dot product of 2-gram*sb vector and b letter vector is 62
+
+dot product of 2-gram*sb vector and o letter vector is 62
+
+dot product of 2-gram*sb vector and t letter vector is 54
+
+dot product of 2-gram*sb vector and l letter vector is 46
+
+dot product of 2-gram*sb vector and s letter vector is 34
+
+dot product of 2-gram*sb vector and w letter vector is 18
+
+dot product of 2-gram*sb vector and c letter vector is 6
+
+dot product of 2-gram*sb vector and d letter vector is 2
+
+dot product of 2-gram*sb vector and v letter vector is -22
+
+dot product of 2-gram*sb vector and q letter vector is -58
+
+dot product of 2-gram*sb vector and y letter vector is -62
+
+dot product of 2-gram*sb vector and n letter vector is -94
+
+dot product of 2-gram*sb vector and m letter vector is -102
+
+dot product of 2-gram*sb vector and z letter vector is -134
+
+dot product of 2-gram*sb vector and j letter vector is -138
+
+dot product of 2-gram*sb vector and e letter vector is -154
+
+dot product of 2-gram*sb vector and p letter vector is -186
+
+dot product of 2-gram*sb vector and i letter vector is -194
+
+dot product of 2-gram*sb vector and u letter vector is -202
+
+dot product of 2-gram*sb vector and g letter vector is -262
+
+dot product of 3-gram*sbi vector and e letter vector is 266
+
+dot product of 3-gram*sbi vector and u letter vector is 254
+
+dot product of 3-gram*sbi vector and t letter vector is 230
+
+dot product of 3-gram*sbi vector and l letter vector is 214
+
+dot product of 3-gram*sbi vector and i letter vector is 174
+
+dot product of 3-gram*sbi vector and o letter vector is 94
+
+dot product of 3-gram*sbi vector and s letter vector is 86
+
+dot product of 3-gram*sbi vector and q letter vector is 54
+
+dot product of 3-gram*sbi vector and p letter vector is 42
+
+dot product of 3-gram*sbi vector and j letter vector is 18
+
+dot product of 3-gram*sbi vector and c letter vector is -14
+
+dot product of 3-gram*sbi vector and v letter vector is -18
+
+dot product of 3-gram*sbi vector and x letter vector is -22
+
+dot product of 3-gram*sbi vector and y letter vector is -30
+
+dot product of 3-gram*sbi vector and a letter vector is -38
+
+dot product of 3-gram*sbi vector and n letter vector is -50
+
+dot product of 3-gram*sbi vector and m letter vector is -54
+
+dot product of 3-gram*sbi vector and h letter vector is -74
+
+dot product of 3-gram*sbi vector and w letter vector is -74
+
+dot product of 3-gram*sbi vector and z letter vector is -82
+
+dot product of 3-gram*sbi vector and g letter vector is -86
+
+dot product of 3-gram*sbi vector and d letter vector is -126
+
+dot product of 3-gram*sbi vector and f letter vector is -130
+
+dot product of 3-gram*sbi vector and b letter vector is -146
+
+dot product of 3-gram*sbi vector and r letter vector is -162
+
+dot product of 3-gram*sbi vector and k letter vector is -242
+
+dot product of 4-gram*sbir vector and b letter vector is 272
+
+dot product of 4-gram*sbir vector and i letter vector is 124
+
+dot product of 4-gram*sbir vector and c letter vector is 108
+
+dot product of 4-gram*sbir vector and p letter vector is 108
+
+dot product of 4-gram*sbir vector and q letter vector is 108
+
+dot product of 4-gram*sbir vector and s letter vector is 96
+
+dot product of 4-gram*sbir vector and t letter vector is 88
+
+dot product of 4-gram*sbir vector and h letter vector is 80
+
+dot product of 4-gram*sbir vector and x letter vector is 60
+
+dot product of 4-gram*sbir vector and a letter vector is 52
+
+dot product of 4-gram*sbir vector and n letter vector is 52
+
+dot product of 4-gram*sbir vector and r letter vector is 32
+
+dot product of 4-gram*sbir vector and w letter vector is 32
+
+dot product of 4-gram*sbir vector and z letter vector is 12
+
+dot product of 4-gram*sbir vector and d letter vector is 4
+
+dot product of 4-gram*sbir vector and u letter vector is -36
+
+dot product of 4-gram*sbir vector and v letter vector is -36
+
+dot product of 4-gram*sbir vector and y letter vector is -40
+
+dot product of 4-gram*sbir vector and g letter vector is -48
+
+dot product of 4-gram*sbir vector and j letter vector is -68
+
+dot product of 4-gram*sbir vector and o letter vector is -72
+
+dot product of 4-gram*sbir vector and l letter vector is -88
+
+dot product of 4-gram*sbir vector and e letter vector is -108
+
+dot product of 4-gram*sbir vector and k letter vector is -112
+
+dot product of 4-gram*sbir vector and f letter vector is -120
+
+dot product of 4-gram*sbir vector and m letter vector is -160
+
+dot product of 5-gram*sbirt vector and a letter vector is 286
+
+dot product of 5-gram*sbirt vector and h letter vector is 218
+
+dot product of 5-gram*sbirt vector and i letter vector is 170
+
+dot product of 5-gram*sbirt vector and g letter vector is 146
+
+dot product of 5-gram*sbirt vector and j letter vector is 142
+
+dot product of 5-gram*sbirt vector and t letter vector is 86
+
+dot product of 5-gram*sbirt vector and y letter vector is 70
+
+dot product of 5-gram*sbirt vector and z letter vector is 58
+
+dot product of 5-gram*sbirt vector and u letter vector is 50
+
+dot product of 5-gram*sbirt vector and v letter vector is 50
+
+dot product of 5-gram*sbirt vector and c letter vector is 46
+
+dot product of 5-gram*sbirt vector and d letter vector is 46
+
+dot product of 5-gram*sbirt vector and x letter vector is 30
+
+dot product of 5-gram*sbirt vector and p letter vector is 14
+
+dot product of 5-gram*sbirt vector and s letter vector is 10
+
+dot product of 5-gram*sbirt vector and m letter vector is -2
+
+dot product of 5-gram*sbirt vector and q letter vector is -6
+
+dot product of 5-gram*sbirt vector and f letter vector is -26
+
+dot product of 5-gram*sbirt vector and e letter vector is -34
+
+dot product of 5-gram*sbirt vector and o letter vector is -38
+
+dot product of 5-gram*sbirt vector and k letter vector is -46
+
+dot product of 5-gram*sbirt vector and w letter vector is -62
+
+dot product of 5-gram*sbirt vector and l letter vector is -66
+
+dot product of 5-gram*sbirt vector and r letter vector is -74
+
+dot product of 5-gram*sbirt vector and b letter vector is -110
+
+dot product of 5-gram*sbirt vector and n letter vector is -122
+

@@ -27,7 +27,7 @@ for size in cluster_sizes:
 lang_vectors.insert(0, np.zeros((1,N)))
 
 
-search_words = ["foot"]#, "consider", "vanish", "the", "birthday", "she", "lady"]
+search_words = ["foot", "birthday"]#, "consider", "vanish", "the", "she", "lady"]
 added_lvls = [lang_vectors[1]]
 lvl1_2 = np.add(lang_vectors[1], lang_vectors[2])
 lvl1_2_3 = np.add(lvl1_2, lang_vectors[3])
@@ -42,13 +42,6 @@ Clipping basically means limiting or saturating the max/min value of each elemen
 You can use a function like below to limit the max/min value of each element: n is the input value, and bitWidth is the number of bits that can be used to represent each element (bitWidth of 1 makes the vector as a binary vector). 
 
 """
-def clamp_alphabet_to_binary(alph_vecs):
-    for letter_vec in RI_letters:
-        for i in range(0, len(letter_vec)):
-            if letter_vec[i] >= 0:
-                letter_vec[i] = 1
-            else:
-                letter_vec[i] = -1
 
 def clamp(lang_vec, Min, Max):
     for i in range(0, len(lang_vec)):
@@ -71,13 +64,12 @@ def clamp_to_binary(lang_vec, boundary):
 #returns a priority queue of most likely letter after prefix
 def predict(pref, length, lang_vec):
     ngram = lang_vec
-    #clamp_to_binary(ngram, 0)
+    clamp_to_binary(ngram, 0)
     #clamp(ngram, -27, 27)
     #clamp(ngram, -10, 10)
     prefix = random_idx.id_vector(N, word[0:length], alph, RI_letters, ordered)
     sprefix = np.roll(prefix, 1)
     prefix_ngram = np.multiply(ngram, sprefix)
-    #clamp_to_binary(prefix_ngram, 0)
     #print prefix_ngram
 
     q = Queue.PriorityQueue()
@@ -93,8 +85,8 @@ def predict(pref, length, lang_vec):
 
 if __name__ == "__main__":
     #f = open("letter_prediction_results.txt", "w")
-    f = open("letter_prediction_results_added.txt", "w")
-    #f = open("letter_prediction_results_clipped.txt", "w")
+    #f = open("letter_prediction_results_added.txt", "w")
+    f = open("letter_prediction_results_clipped_binary.txt", "w")
     #f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
     #clamp_alphabet_to_binary(RI_letters)
     for word in search_words:
