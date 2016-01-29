@@ -73,8 +73,9 @@ def clamp_to_binary(lang_vec, boundary):
 def predict2(lvl_n, pref):
     v = ""
     prefix = np.zeros((1, 10000))
-    for i in pref:
-        v = v+i
+    pref_reversed = pref[::-1];
+    for i in pref_reversed:
+        v = i+v
         p = random_idx.id_vector(N, v, alph, RI_letters, ordered)
         prefix = np.add(p,prefix)
 
