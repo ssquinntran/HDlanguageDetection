@@ -48,7 +48,27 @@ def generate_letter_id_vectors(N, k, alph=alphabet):
 #           dictionary[clusters[i]] = RI[i]
 #       return dictionary
 
+def generate_text_vector(N, RI_letters, cluster_sz, text_name):
+    text_vector = np.zeros((1,N))
 
+    text = utils.load_text(text_name)
+
+    for char_idx in xrange(len(text)-cluster_sz+1):
+        sidx = char_idx
+        eidx = char_idx+cluster_sz
+        
+        cluster = text[sidx:eidx]
+        
+        vector = np.ones((1,N))
+        for letter in cluster:
+            letter_idx = alphabet.find(letter)
+            vector = np.roll(vector, 1)
+            vector = np.multiply(vector, RI_letters[letter_idx, :])
+            
+        text_vector += vector
+    return text_vector / (len(text)-cluster_sz+1)
+    
+ 
 """
 Returns lang_vec and then vocab_vec
 
@@ -191,10 +211,13 @@ def generate_RI_sentence(N, RI_letters, cluster_sz, ordered, text, alph=alphabet
     #Not really fast. Theoretically faster, but not for real (not using cache)  
 def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabet):
     text_vector = np.zeros((1, N))
-    text = utils.load_text(text_name)
+    text = text_name # utils.load_text(text_name)
     cluster = ''
     vector = np.ones((1,N))
-    for char_num in xrange(len(text)):      
+    for char_num in xrange(len(text)):    
+        if (char_num % 1000) == 0:
+            print char_num,
+            
         cluster = cluster + text[char_num]
         if len(cluster) < cluster_sz:
             continue
