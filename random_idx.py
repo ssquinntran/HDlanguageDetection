@@ -97,7 +97,6 @@ def generate_vocab_lang_vectors(N, RI_letters, cluster_sz, ordered, text_name, m
 
     return text_vector, vocab_vec
 
-
 def id_vector(N, cluster, alphabet, RI_letters,ordered=0):
         if cluster == '':
                         return 0
@@ -149,7 +148,6 @@ def generate_RI_str(N, RI_letters, cluster_sz, ordered, string, alph=alphabet):
                                 cluster = string[char_num - j] + cluster
                         text_vector += id_vector(N, cluster, alph,RI_letters, ordered)
         return text_vector
-    
 
 def generate_RI_text(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabet):
         # generate RI vector for "text_name"
@@ -168,7 +166,7 @@ def generate_RI_text(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabe
                                 cluster = text[char_num - j] + cluster
                         text_vector += id_vector(N, cluster, alph,RI_letters, ordered)
         return text_vector
-    
+
 def generate_RI_sentence(N, RI_letters, cluster_sz, ordered, text, alph=alphabet):
         # generate RI vector for "text_name"
         # assumes text_name has .txt
@@ -186,8 +184,7 @@ def generate_RI_sentence(N, RI_letters, cluster_sz, ordered, text, alph=alphabet
                                 cluster = text[char_num - j] + cluster
                         text_vector += id_vector(N, cluster, alph,RI_letters, ordered)
         return text_vector
-    
-    
+
     #Not really fast. Theoretically faster, but not for real (not using cache)  
 def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabet):
     text_vector = np.zeros((1, N))
@@ -216,7 +213,7 @@ def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=al
                 vector = np.multiply(vector, RI_letters[letter_idx,:])
         text_vector += vector
     return text_vector
-        
+
 def generate_RI_text_words(N, RI_letters, text_name, alph=alphabet):
         # generate RI vector for "text_name"
         # assumes text_name has .txt
