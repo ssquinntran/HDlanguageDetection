@@ -13,11 +13,12 @@ from unidecode import unidecode
 
 include = string.lowercase
 exclude = string.punctuation + string.whitespace + "\n\r"
+exclude.replace(" ", "");
 
 try:
 		if len(sys.argv)> 1 and len(sys.argv) < 3 or len(sys.argv)>3:
 				print "Usage: python script.py <inputFile.txt> <outputFile.txt>"
-				exit()
+				sys.exit()
 		run = 1
 		inputfn = sys.argv[1]
 		outputfn = sys.argv[2]
