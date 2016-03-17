@@ -184,6 +184,7 @@ def generate_RI_text(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabe
                         cluster = ''
                         for j in xrange(cluster_sz):
                                 cluster = text[char_num - j] + cluster
+                        print cluster
                         text_vector += id_vector(N, cluster, alph,RI_letters, ordered)
         return text_vector
 
@@ -216,6 +217,7 @@ def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=al
             print char_num,
             
         cluster = cluster + text[char_num]
+        print cluster
         if len(cluster) < cluster_sz:
             continue
         elif len(cluster) > cluster_sz:
@@ -229,6 +231,7 @@ def generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=al
             vector = np.multiply(vector, RI_letters[letter_idx,:])
             cluster = cluster[1:]
         else: # (len(cluster) == cluster_size), happens once
+            print cluster
             letters = list(cluster)
             for letter in letters:
                 vector = np.roll(vector,1)
