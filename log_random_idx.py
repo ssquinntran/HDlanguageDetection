@@ -55,7 +55,7 @@ n_gram_frequencies, alph=alphabet):
                 n_gram_frequencies[cluster_sz][cluster] = 1
             else:
                 n_gram_frequencies[cluster_sz][cluster] += 1
-            text_vector += (1/(exp(n_gram_frequencies[cluster_sz][cluster])+1))*id_vector(N, cluster, alph,RI_letters, ordered)
+            text_vector += math.exp(-n_gram_frequencies[cluster_sz][cluster])*id_vector(N, cluster, alph,RI_letters, ordered)
     return text_vector
 
 def log_generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabet):
