@@ -1,23 +1,36 @@
 import numpy as np
 import string
 import collections
+import pickle
 import random_idx
 import log_random_idx
 
+#read from serialized files
+fread = open("lv", "r")
+fread1 = open("log_lang_vectors", "r")
+fread2 = open("n_gram_frequencies", "r")
+lv = pickle.load(fread)
+lang_vectors = pickle.load(fread1)
+n_gram_frequencies = pickle.load(fread2)
+fread.close()
+fread1.close()
+fread2.close()
 alphabet = string.lowercase+" "
 filepath = "preprocessed_texts/AliceInWonderland.txt"
 k = 5000
 N = 30000;
 ordered = 1
 
-cluster_sizes = [1, 2, 3, 4, 5]
+#cluster_sizes = [1, 2, 3, 4, 5]
+cluster_sizes = [1, 2, 3]
 n_grams = []
-lv = random_idx.generate_letter_id_vectors(N,15000);
+#lv = random_idx.generate_letter_id_vectors(N,15000);
 f = open(filepath, "r");
 text = f.read();
 text = ''.join([x for x in text if x in alphabet])[0:10000];
 #for each n, dictionary of key: n gram and value: frequency
-n_gram_frequencies = [{} for _ in range(len(cluster_sizes) + 1)]
+#n_gram_frequencies = [{} for _ in range(len(cluster_sizes) + 1)]
+
 # create language vector for Alice in Wonderland made of summed n-gram vectors for each
 # n in cluster_sizes
 def create_log_lang_vec(cluster_sizes, N=N, k=k):
@@ -89,26 +102,35 @@ def determine_space(text, window_size, n_gram_frequencies):
 	total_freq = sum(n_gram_frequencies[3].values())
 	space_indices = []
 	#choosing an arbitary threshold right now
-	
-	for i in range(0, text_size, window_size):
-		window = text[i:window_size]
-		first_freq = n_gram_frequencies[3][window[:3]]
-		last_freq = n_gram_frequencies[3][window[3:]]
-		threshold = (first_freq + last_freq)/float(3)
+	#threshold = .001
+	#print text
+	fwrite = open("alice_with_spaces.txt", "w")
+	for i in range(0,(text_size//window_size)*window_size,window_size):
+		window = text[i:i+window_size]
+		#print window
 		min_index = 0
 		min_freq = float('inf')
+		threshold = (n_gram_frequencies[3][window[:3]] + \
+		n_gram_frequencies[3][window[window_size-3:window_size]]) / float(total_freq)
 		for j in range(window_size):
 			trigram_s = window[j:j+3]
-			freq = n_gram_frequencies[3][trigram_s]
-			if freq < min_freq:
-				min_index = j #i+j in text
-				min_freq = freq
+			#print trigram_s
+			#this check shouldn't be necessary though
+			if trigram_s in n_gram_frequencies[3].keys():
+				#print "%s is in n_gram_frequencies" % (trigram_s)
+				freq = n_gram_frequencies[3][trigram_s]/float(total_freq)
+				if freq < min_freq:
+					min_index = j #i+j in text
+					min_freq = freq
 		#insert space
 		if min_freq < threshold:
 			space_indices.append(i+min_index)
+			fwrite.write(window[0:min_index+1] + " " + window[min_index+1:])
+			fwrite.write("\n")
 	
 	#edge case. laterrrrr
 	#for i in range(window_size*(text_size//window_size), text_size):
+	fwrite.close()
 	return space_indices
 
 postprocessed = load_log_vector(filepath, lv)
@@ -122,23 +144,31 @@ print recover_frequency(lv, "a", postprocessed)
 print text.count("a")
 
 # lang_vectors in sizes 1-8
-lang_vectors = []
-for size in cluster_sizes:
-    lang_vectors.append(create_log_lang_vec([size]))
-lang_vectors.insert(0, np.zeros((1,N)))
+#lang_vectors = []
+#for size in cluster_sizes:
+#    lang_vectors.append(create_log_lang_vec([size]))
+#lang_vectors.insert(0, np.zeros((1,N)))
 
-print lang_vectors
+spaces = determine_space(text, 8, n_gram_frequencies)
+print "length of alice %d" % (len(text))
+print "length of alice with spaces %d" %(len(text) + len(spaces))
+#print "number of 5 grams"
+#print len(n_gram_frequencies[5].keys())
 
-#for vec in lang_vectors:
-#	print vec
-print determine_space(text, 6, n_gram_frequencies)
+#que_vector = log_random_idx.id_vector(N, "que", alphabet, lv, ordered)
+#log_dot = np.dot(que_vector, np.transpose(lang_vectors[3]))
+#freq = n_gram_frequencies[3]["que"]/float(sum(n_gram_frequencies[3].values()))
+#print log_dot
+#print freq
+#print "frequency of 'que' in log vector:%d in actual:%d" (log_dot, freq)
 
-"""
-ERROR
-Traceback (most recent call last):
-  File "log_lang_vectors.py", line 134, in <module>
-    print determine_space(text, 6, n_gram_frequencies)
-  File "log_lang_vectors.py", line 102, in determine_space
-    freq = n_gram_frequencies[3][trigram_s]
-KeyError: 'ec'
-"""
+# save vectors to file
+#fwrite = open("lv", "w")
+#fwrite1 = open("log_lang_vectors", "w")
+#fwrite2 = open("n_gram_frequencies", "w")
+#pickle.dump(lv, fwrite)
+#pickle.dump(lang_vectors, fwrite1)
+#pickle.dump(n_gram_frequencies, fwrite2)
+#fwrite.close()
+#fwrite1.close()
+#fwrite2.close()
