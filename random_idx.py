@@ -82,7 +82,7 @@ def generate_vocab_lang_vectors(N, RI_letters, cluster_sz, ordered, text_name, m
                 letter_idx = alphabet.find(letter)
                 vector = np.multiply(vector, RI_letters[letter_idx,:])
 
-        if(np.dot(vocab_vec, vector.T)<-5000):
+        if(np.dot(vocab_vec, vector.T)<-10000):
             text_vector += vector;
 
         else:
