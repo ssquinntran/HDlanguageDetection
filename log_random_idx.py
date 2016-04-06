@@ -32,7 +32,7 @@ def log_generate_RI_str(N, RI_letters, cluster_sz, ordered, string, alph=alphabe
     text_vector = np.log2(text_vector)
     return text_vector
 
-#EDITING
+
 def log_generate_RI_text(N, RI_letters, cluster_sz, ordered, text_name, \
 n_gram_frequencies, alph=alphabet):
     # generate RI vector for "text_name"
@@ -61,6 +61,30 @@ n_gram_frequencies, alph=alphabet):
 def log_generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph=alphabet):
     text_vector = random_idx.generate_RI_text_fast(N, RI_letters, cluster_sz, ordered, text_name, alph)
     text_vector = np.log2(text_vector)
+    return text_vector
+
+def log_generate_RI_text_partitioned(N, RI_letters, cluster_sz, ordered, text, \
+n_gram_frequencies, alph=alphabet):
+    # generate RI vector for "text_name"
+    # assumes text_name has .txt
+
+    text_vector = np.zeros((1, N))
+    for char_num in xrange(len(text)):
+
+        if char_num < cluster_sz:
+            continue
+        else:
+            # build cluster
+            cluster = ''
+            for j in xrange(cluster_sz):
+                cluster = text[char_num - j] + cluster
+            #record cluster sighting to frequencies
+
+            if cluster not in n_gram_frequencies[cluster_sz].keys():
+                n_gram_frequencies[cluster_sz][cluster] = 1
+            else:
+                n_gram_frequencies[cluster_sz][cluster] += 1
+            text_vector += math.exp(-n_gram_frequencies[cluster_sz][cluster])*id_vector(N, cluster, alph,RI_letters, ordered)
     return text_vector
 
 def log_generate_RI_text_words(N, RI_letters, text_name, alph=alphabet):

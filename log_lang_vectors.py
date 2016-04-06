@@ -21,8 +21,7 @@ k = 5000
 N = 30000;
 ordered = 1
 
-#cluster_sizes = [1, 2, 3, 4, 5]
-cluster_sizes = [1, 2, 3]
+cluster_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 n_grams = []
 #lv = random_idx.generate_letter_id_vectors(N,15000);
 f = open(filepath, "r");
@@ -76,27 +75,7 @@ def get_letter_vec(s, letter_vec):
 def recover_frequency(letter_vec, s, total):
 	vec = get_letter_vec(s, letter_vec);
 	return np.dot(vec, total);
-#right now, determine if a specific position in the window (in big picture, the text)
-#should include a space. frequency of the n grams should be small
-#how to determine if a sequence is particularly weak:
-"""
-My idea for a "particularly weak" link is that the first and
-the last trigrams in that window are much more frequent than
-the middle trigrams that cress the boundary.  For example,
-if ABCDEF is in the window, it should turn into ABC_DEF if
-ABC and DEF are frequent and BCD and CDE are infrequent.
-Just add the end frequencies and subtract the middle
-frequencies and compare the result to a threshold.
 
-The threshold should be a parameter that is a simple
-function of the frequencies.  Then see if you can find
-thresholds that insert spaces in Alice stream that are, say,
-.90 correct, .95 correct, and .99 correct.  Ignore missing
-spaces--there will be plenty--count only misplaced spaces.
-No need to write a program to do the checking--just eye-ball
-to see how well we can do with trigrams and how it responds
-to parameter setting.
-"""
 def determine_space(text, window_size, n_gram_frequencies):
 	text_size = len(text)
 	total_freq = sum(n_gram_frequencies[3].values())
@@ -112,6 +91,8 @@ def determine_space(text, window_size, n_gram_frequencies):
 		min_freq = float('inf')
 		threshold = (n_gram_frequencies[3][window[:3]] + \
 		n_gram_frequencies[3][window[window_size-3:window_size]]) / float(total_freq)
+		#threshold = (n_gram_frequencies[3][window[:3]] + \
+		#n_gram_frequencies[3][window[window_size-3:window_size]])/float(2)
 		for j in range(window_size):
 			trigram_s = window[j:j+3]
 			#print trigram_s
@@ -119,6 +100,7 @@ def determine_space(text, window_size, n_gram_frequencies):
 			if trigram_s in n_gram_frequencies[3].keys():
 				#print "%s is in n_gram_frequencies" % (trigram_s)
 				freq = n_gram_frequencies[3][trigram_s]/float(total_freq)
+				#freq = n_gram_frequencies[3][trigram_s]
 				if freq < min_freq:
 					min_index = j #i+j in text
 					min_freq = freq
