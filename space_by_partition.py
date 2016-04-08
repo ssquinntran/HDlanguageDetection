@@ -95,7 +95,7 @@ def naive_solution():
 	for word in dictionary:
 		file.write(word + "\n")
 	file.close()
-	
+
 def update_freqs_and_words(freqs, text, cluster_sizes, window_size):
 	length = len(text)
 	first_half = ""
@@ -125,6 +125,7 @@ def update_freqs_and_words(freqs, text, cluster_sizes, window_size):
 
 def dp_solution():
 	dictionary = []
+	# update freqs as you build up alice
 	freqs = []
 	partition_text = [s for s in text]
 	while partition_text:
