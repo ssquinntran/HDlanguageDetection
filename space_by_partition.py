@@ -7,16 +7,16 @@ import log_random_idx
 import log_lang_vectors as ll
 
 #arbitrarily setting divisions up to unigrams
-divisions = 2
+divisions = 254
 num_partitions = 2**divisions
-
+partition_window = 30
 alphabet = string.lowercase+" "
 filepath = "preprocessed_texts/AliceInWonderland.txt"
 k = 5000
 N = 30000;
 ordered = 1
 #need to repopulate lang_vectors
-cluster_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+cluster_sizes = [1, 2, 3, 4, 5]#, 6, 7, 8, 9, 10]
 lv = random_idx.generate_letter_id_vectors(N,15000);
 f = open(filepath, "r");
 text = f.read();
@@ -36,6 +36,7 @@ def create_lang_vec(cluster_sizes, text, n_gram_frequencies, N=N, k=k):
         	ordered, text, n_gram_frequencies, alphabet)
         total_lang += lang_vector
     return total_lang
+
 # window = largest n_gram
 def determine_words(text, cluster_sizes, lang_vectors, window_size):
 	length = len(text)
@@ -96,50 +97,90 @@ def naive_solution():
 		file.write(word + "\n")
 	file.close()
 
-def update_freqs_and_words(freqs, text, cluster_sizes, window_size):
+# start with freqs of entire text
+# denominator is the same
+def initialize_freqs(text, cluster_sizes):
+	freq = {}
 	length = len(text)
-	first_half = ""
-	second_half = ""
-	# find the weight for each word pattern. assume overlap
-	# min = min weight of 1*2*3...*10 ngram
-	# set by window
-	# because denominators are the same across substrings, only have to compare numerators
+	for c in cluster_sizes:
+		# print "on cluster %d" % c
+		for i in range(0,length):
+			# are we only considering left to right?
+			ic = min(i+c,length)
+			substring = text[i:ic]
+			# print substring
+			if substring not in freq.keys():
+				freq[substring] = 1
+			else:
+				freq[substring] += 1
+	return freq
+#assign an arbitary break in the middle
+#use that to partition the left and right
+#subtract right frequencies from left frequencies to get left_freq
+#right_freq is the complement
+# assumption that partition window smaller than text
+# using global frequencies
+def update_freqs(text, partition_window, freqs, cluster_sizes):
+	right_freq = {}
+	length = len(text)
+	mid = len(text)//2
+	#find the split
 	min_freq = float("inf")
-	min_index = 0
-	for i in range(0,(length//window_size)*window_size):
-		window = text[i:i+window_size]
-		#print window
+	split_index = mid
+	for i in range(mid-(partition_window//2), mid+(partition_window//2)):
 		freq = 1
 		for c in cluster_sizes:
-			# just check beginning because the way 
-			# windowing works already conditions on checking every possible
-			# position for a space
-			n_gram  = log_random_idx.id_vector(N, window[:c], alphabet, lv, ordered)
-			# to calculate joint probability
-			# assuming independence across n grams in this window. sounds sketch
-			freq *= np.dot(n_gram, np.transpose(lang_vectors[c]))
+			ic = min(i+c,length)
+			freq *= freqs[text[i:i+c]]
 		if freq < min_freq:
-			min_index = i
 			min_freq = freq
-	return text[:min_index], text[min_index:]
+			split_index = i
+	left_part = text[:split_index]
+	right_part = text[split_index:]
+	# assign frequencies for left half
+	left_freq = initialize_freqs(left_part, cluster_sizes)
+	# assign frequencies for right half
+	right_freq = initialize_freqs(right_part, cluster_sizes)
+	return left_freq, right_freq, left_part, right_part, split_index
 
-def dp_solution():
+
+def dp_solution(text, divisions=divisions):
 	dictionary = []
-	# update freqs as you build up alice
-	freqs = []
-	partition_text = [s for s in text]
-	while partition_text:
-		first_part = partition_text.pop(0)
-		second_part = partition_text.pop(0)
-		if first_part in freqs.keys():
-			freqs[first_part] += 1
-		else:
-			freqs[first_part] = 1
-		if second_part in freqs.keys():
-			freqs[second_part] += 1
-		else:
-			freqs[second_part] = 1
-		# need to choose to insert spaces or just concatenate
-		word = update_freqs_and_words(freqs, part, cluster_sizes, max(cluster_sizes))
-		dictionary.append(word)
-		partition_text.append(word)
+	# includes indices of all the spaces for easier comparison
+	spaces_indices = []
+	# update freqs as you build up alice. right now, don't include spaces
+	# array of dictionaries where dictionary index corresponds to partition index
+	# left, right order
+	# empty dict first
+	freqs = [initialize_freqs(text, cluster_sizes)]
+	# print freqs
+	partition_text = [text]
+	for i in range(0,divisions):
+		print "division %d" % i
+		freq = freqs.pop(0)
+		part = partition_text.pop(0)
+		left_freq, right_freq, left_part, right_part, split_index = \
+		update_freqs(part, partition_window, 
+			freq, cluster_sizes)
+		print "LEFT: " + left_part
+		print "RIGHT: " + right_part
+		freqs.append(left_freq)
+		freqs.append(right_freq)
+		dictionary.append(left_part)
+		dictionary.append(right_part)
+		partition_text.append(left_part)
+		partition_text.append(right_part)
+		spaces_indices.append(split_index)
+	return dictionary, spaces_indices
+dictionary, spaces_indices = dp_solution(text,divisions)
+spaces_indices = sorted(spaces_indices)
+file = open("spaced_out", "w")
+for i in range(0,len(text)):
+	if i in spaces_indices:
+		file.write("%s " % text[i])
+	else:
+		file.write(text[i])
+file.close()
+
+
+#create an orthonormal set
