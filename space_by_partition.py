@@ -154,6 +154,7 @@ def dp_solution(text, divisions=divisions):
 	# empty dict first
 	freqs = [initialize_freqs(text, cluster_sizes)]
 	# print freqs
+	file = open("spaced_out", "w")
 	partition_text = [text]
 	for i in range(0,divisions):
 		print "division %d" % i
@@ -163,7 +164,9 @@ def dp_solution(text, divisions=divisions):
 		update_freqs(part, partition_window, 
 			freq, cluster_sizes)
 		print "LEFT: " + left_part
+		file.write("LEFT: " + left_part + "\n")
 		print "RIGHT: " + right_part
+		file.write("RIGHT: " + right_part + "\n")
 		freqs.append(left_freq)
 		freqs.append(right_freq)
 		dictionary.append(left_part)
@@ -171,16 +174,17 @@ def dp_solution(text, divisions=divisions):
 		partition_text.append(left_part)
 		partition_text.append(right_part)
 		spaces_indices.append(split_index)
+	file.close()
 	return dictionary, spaces_indices
 dictionary, spaces_indices = dp_solution(text,divisions)
 spaces_indices = sorted(spaces_indices)
-file = open("spaced_out", "w")
-for i in range(0,len(text)):
-	if i in spaces_indices:
-		file.write("%s " % text[i])
-	else:
-		file.write(text[i])
-file.close()
+#file = open("spaced_out", "w")
+#for i in range(0,len(text)):
+#	if i in spaces_indices:
+#		file.write("%s " % text[i])
+#	else:
+#		file.write(text[i])
+#file.close()
 
 
 #create an orthonormal set
