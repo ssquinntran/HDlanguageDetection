@@ -176,8 +176,8 @@ def dp_solution(text, divisions=divisions):
 		spaces_indices.append(split_index)
 	file.close()
 	return dictionary, spaces_indices
-dictionary, spaces_indices = dp_solution(text,divisions)
-spaces_indices = sorted(spaces_indices)
+# dictionary, spaces_indices = dp_solution(text,divisions)
+# spaces_indices = sorted(spaces_indices)
 #file = open("spaced_out", "w")
 #for i in range(0,len(text)):
 #	if i in spaces_indices:
@@ -188,3 +188,57 @@ spaces_indices = sorted(spaces_indices)
 
 
 #create an orthonormal set
+
+def determine_words2(text, cluster_sizes, lang_vector, window_size):
+	cluster_sizes = cluster_sizes[1:]
+	win_start = (len(text)-partition_window)//2
+	window = text[win_start:win_start+partition_window]
+	first_half = ""
+	second_half = ""
+	w = max(cluster_sizes)
+	log_counts_cum = np.zeros((w+1, window_size))
+	for i in range(window_size-w+1):
+		for c in cluster_sizes:
+			chunk = window[i:i+c]
+			n_gram = log_random_idx.id_vector(N, chunk, alphabet, lv, ordered)
+			log_counts_cum[c,i] = np.dot(n_gram, lang_vector.T)
+			if i > 0:
+				log_counts_cum[c, i] += log_counts_cum[c, i-1]
+
+	min_count = float("inf")
+	min_index = 0
+	for i in range(w-1, window_size-w+2):
+		count = 0
+		for c in cluster_sizes:
+			count += log_counts_cum[c, i-1] - log_counts_cum[c, i-c]
+		if count < min_count:
+			min_index = i
+			min_count = count
+	return text[:min_index+win_start], text[min_index+win_start:]
+
+def dp_solution2(text, divisions=divisions):
+	dictionary = []
+	freqs = [None]
+	for c in cluster_sizes:
+		freqs.append({})
+	lang_vec = create_lang_vec(cluster_sizes, text, freqs, N=N, k=k)
+
+	file = open("spaced_out2.txt", "w")
+	partition_text = [text]
+	for i in range(0,divisions):
+		print "division %d" % i
+		part = partition_text.pop(0)
+		left_part, right_part = determine_words2(part, cluster_sizes, lang_vec, \
+			partition_window)
+		print "LEFT: " + left_part
+		file.write("LEFT: " + left_part + "\n")
+		print "RIGHT: " + right_part
+		file.write("RIGHT: " + right_part + "\n")
+		dictionary.append(left_part)
+		dictionary.append(right_part)
+		partition_text.append(left_part)
+		partition_text.append(right_part)
+	file.close()
+	return dictionary
+
+dp_solution2(text, divisions)
