@@ -12,8 +12,9 @@ import re
 from unidecode import unidecode
 
 include = string.lowercase
-exclude = string.punctuation + string.whitespace + "\n\r"
-exclude.replace(" ", "");
+#exclude = string.punctuation + string.whitespace + "\n\r"
+exclude = string.punctuation #+ "\n\r"
+#exclude.replace(" ", "");
 
 try:
 		if len(sys.argv)> 1 and len(sys.argv) < 3 or len(sys.argv)>3:

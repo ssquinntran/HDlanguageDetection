@@ -65,8 +65,7 @@ def determine_words(text, cluster_sizes, lang_vectors, window_size):
 			min_freq = freq
 	return text[:min_index], text[min_index:]
 
-#what does this even do??
-postprocessed = ll.load_log_vector(filepath, lv)
+
 # right now dictionary has all the partitions -> at some point = words
 
 def naive_solution():
@@ -120,6 +119,7 @@ def initialize_freqs(text, cluster_sizes):
 #right_freq is the complement
 # assumption that partition window smaller than text
 # using global frequencies
+# take max instead for patterns not crossing the boundary
 def update_freqs(text, partition_window, freqs, cluster_sizes):
 	right_freq = {}
 	length = len(text)
