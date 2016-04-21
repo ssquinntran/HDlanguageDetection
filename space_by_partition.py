@@ -207,10 +207,14 @@ def determine_words2(text, cluster_sizes, lang_vector, window_size):
 
 	min_count = float("inf")
 	min_index = 0
-	for i in range(w-1, window_size-w+2):
+	for i in range(w, window_size-w+1):
 		count = 0
 		for c in cluster_sizes:
-			count += log_counts_cum[c, i-1] - log_counts_cum[c, i-c]
+			inc = 0
+			inc += 2*(log_counts_cum[c, i-1] - log_counts_cum[c, i-c])/(c-1)
+			inc -= log_counts_cum[c, i] - log_counts_cum[c, i-1]
+			inc -= log_counts_cum[c, i-c] - log_counts_cum[c, i-c-1]
+			count += (c-1)*inc
 		if count < min_count:
 			min_index = i
 			min_count = count
