@@ -114,7 +114,7 @@ def streaming_training(next_character, array1, array2, lv1, lv2, trellis,n):
 		# print array1[len(nospace)-1]
 	return array1, array2;
 
-def garden_path(stripped_text, array1, array2, n, original):
+def garden_path(stripped_text, array1, array2, n, original, training = 0):
 	test_text = stripped_text[:n-1]
 	trellis = [(0, test_text)];
 	count = 0;
@@ -144,8 +144,8 @@ def garden_path(stripped_text, array1, array2, n, original):
 
 				space_cost = .9*space_first_freq
 				k.append((j[0]+space_cost, j[1]+' '+i));
-
-			array1, array2 = streaming_training(i, array1, array2, lv1, lv2, trellis, 5)
+			if training:
+				array1, array2 = streaming_training(i, array1, array2, lv1, lv2, trellis, 5)
 			# print array1[len(no_space)-1]
 			# print array1[0]
 
@@ -154,34 +154,37 @@ def garden_path(stripped_text, array1, array2, n, original):
 		k = sorted(k, key=lambda t:t[0], reverse=True);
 		trellis = k[:25];
 
-	count = 0;
-	correct = 0;
-	for v in trellis[0][1]:
-		if(len(original) == count):
-			print correct/float(len(''.join([x for x in trellis[0][1] if x == ' '])))
-			break;
-		if original[count] == ' ' and v == ' ':
-			correct = correct+1;
-			count = count+1;
-			continue;
-		while original[count] == ' ':
-			count = count+1;
-		if original[count] == v:
-			count = count+1;
-			continue;
+	# count = 0;
+	# correct = 0;
+	# for v in trellis[0][1]:
+	# 	if(len(original) == count):
+	# 		print correct/float(len(''.join([x for x in trellis[0][1] if x == ' '])))
+	# 		break;
+	# 	if original[count] == ' ' and v == ' ':
+	# 		correct = correct+1;
+	# 		count = count+1;
+	# 		continue;
+	# 	while original[count] == ' ':
+	# 		count = count+1;
+	# 	if original[count] == v:
+	# 		count = count+1;
+	# 		continue;
 
-		if v == ' ':
-			continue;
+	# 	if v == ' ':
+	# 		continue;
 
 
-	print "Correct percentage: "
-	print correct/float(len(''.join([x for x in trellis[0][1] if x == ' '])))
+	# print "Correct percentage: "
+	# print correct/float(len(''.join([x for x in trellis[0][1] if x == ' '])))
 
 	return trellis
 
 
-
-
+"""
+The interface that you should interact with
+"""
+def wrapper_garden(s, n, training = 0):
+	return garden_path(s, postprocessed_array1, postprocessed_array2, n, "", training)
 
 
 
@@ -254,17 +257,26 @@ def garden_path_accuracy(stripped_text, array, n, original):
 
 #starts tests
 
+test = wrapper_garden("thecatjumpedovertheillegalbrowndog", 4);
+print test
+
 # test = garden_path_accuracy(''.join(text[:1000].split()), postprocessed_array, 5, text[:1000])
 # print ""
 # print test[0];
 # print test[0][2]/float(len(''.join([x for x in test[0][1] if x == ' '])))
 # print ""
 
-string = "begin with there is no doubt whatever about that";
-test = garden_path(''.join(string.split()), postprocessed_array1,postprocessed_array2, 5, string)#, "alice she had grown to her full size by this time youre nothing but a pack of cards")
-# print "Expected: " + "alice she had grown to her full size by this time youre nothing but a pack of cards"
-print test[0:5];
-print ""
+# string = "Edward Snowden has seemingly called on the British public to help oust David Cameron following the prime minister's admission that he profited from his late father's offshore trust. Cameron on Thursday finally conceded he and his wife, Samantha, owned shares in Ian Cameron's Blairmore Holdings, before selling them for around 30,000 in 2010. Snowden, who this time last week"
+# string = string.lower();
+# string = string.join([x for x in string if x in string.lowercase]);
+# print string
+
+# string = text[100:900]
+
+# test = garden_path("enincheshighandherfacebrightenedupa", postprocessed_array1, postprocessed_array2, 5, "")#, "alice she had grown to her full size by this time youre nothing but a pack of cards")
+# # print "Expected: " + "alice she had grown to her full size by this time youre nothing but a pack of cards"
+# print test[0:5];
+# print ""
 
 # test = garden_path(''.join(string.split()), postprocessed_array1,postprocessed_array2, 5, string)#, "alice she had grown to her full size by this time youre nothing but a pack of cards")
 
