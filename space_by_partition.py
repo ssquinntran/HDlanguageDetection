@@ -120,6 +120,7 @@ def initialize_freqs(text, cluster_sizes):
 #right_freq is the complement
 # assumption that partition window smaller than text
 # using global frequencies
+# take max instead for patterns not crossing the boundary
 def update_freqs(text, partition_window, freqs, cluster_sizes):
 	right_freq = {}
 	length = len(text)
