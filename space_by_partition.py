@@ -65,8 +65,7 @@ def determine_words(text, cluster_sizes, lang_vectors, window_size):
 			min_freq = freq
 	return text[:min_index], text[min_index:]
 
-#what does this even do??
-postprocessed = ll.load_log_vector(filepath, lv)
+
 # right now dictionary has all the partitions -> at some point = words
 
 def naive_solution():

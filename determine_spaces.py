@@ -45,7 +45,7 @@ def load_log_vector(filepath,letter_vec):
 		total += np.log2(v+1)*get_letter_vec(k, letter_vec)
 		print k
 		print v
-		#total += 1/float(recover_frequency(letter_vec, k, ))*get_letter_vec(k, letter_vec)
+		
 
 	return total;
 
@@ -91,12 +91,6 @@ def determine_space(text, window_size, n_gram_frequencies):
 postprocessed = load_log_vector(filepath, lv)
 print postprocessed
 
-print ("s")
-print recover_frequency(lv, "s", postprocessed)
-print text.count("s");
-print("a")
-print recover_frequency(lv, "a", postprocessed)
-print text.count("a")
 
 spaces = determine_space(text, 8, n_gram_frequencies)
 print "length of alice %d" % (len(text))
