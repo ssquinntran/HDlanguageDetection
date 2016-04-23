@@ -28,8 +28,7 @@ def create_log_lang_vec(filepath, cluster_sizes, N=N, k=k):
         print "generating language vector of cluster size", cz
         # which alphabet to use
         lang_vector = log_random_idx.log_generate_RI_text(N, lv, cz, \
-        	ordered, "preprocessed_texts/AliceInWonderland.txt", \
-        	n_gram_frequencies, alphabet)
+        	ordered, filepath, n_gram_frequencies, alphabet)
         total_lang += lang_vector
     return total_lang
 
@@ -96,7 +95,7 @@ def initialize(filepath="preprocessed_texts/AliceInWonderland.txt"):
 	fwrite1.close()
 	fwrite2.close()
 
-def train(filepath="preprocessed_texts/alice-only-stream-w-spaces.txt"):
+def training_set(filepath="preprocessed_texts/alice-only-spaced.txt"):
 	n_grams = []
 	lv = random_idx.generate_letter_id_vectors(N,15000);
 	f = open(filepath, "r");

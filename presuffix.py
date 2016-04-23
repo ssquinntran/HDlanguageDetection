@@ -2,25 +2,19 @@ import numpy as np
 import string
 import collections
 import random_idx
+import log_lang_vectors as llv
 
 alphabet = string.lowercase+' ~'
 N = 100000
 # ~ Tilde represents end character
 
 def get_alice_space():
-	filepath = "raw_texts/texts_english/alice_in_wonderland.txt"
+	#filepath = "raw_texts/texts_english/alice_in_wonderland.txt"
+	filepath = "preprocessed_texts/alice-only-spaced.txt"
 	f = open(filepath, "r")
 	text = f.read().lower();
 	text = ''.join([x for x in text if x in alphabet])
 	return text
-
-def get_letter_vec(s, letter_vec):
-	if(len(s) == 1):
-		return letter_vec[alphabet.index(s)];
-	vec = letter_vec[alphabet.index(s[0])];
-	for i in s[1:]:
-		vec = np.multiply(np.roll(vec, 1), letter_vec[alphabet.index(i)]);
-	return vec;
 
 
 """
@@ -46,7 +40,7 @@ def suffix_gram(s, dim, n, lv = None):
 		else:
 			words[i] = words[i][-n:]
 
-		svec = get_letter_vec(words[i], lv);
+		svec = llv.get_letter_vec(words[i], lv);
 		suffix = suffix+svec;
 
 	return suffix, lv
@@ -76,16 +70,16 @@ def prefix_gram(s, dim, n, lv = None):
 		else:
 			words[i] = words[i][:n]
 
-		pvec = get_letter_vec(words[i], lv);
+		pvec = llv.get_letter_vec(words[i], lv);
 		prefix = prefix+pvec;
 
 	return prefix, lv
 
 def recover_pref_freq(s):
-	return get_letter_vec(s, letter_vec).dot(ptotal)
+	return llv.get_letter_vec(s, letter_vec).dot(ptotal)
 
 def recover_suf_freq(s):
-	return get_letter_vec(s, letter_vec).dot(stotal)
+	return llv.get_letter_vec(s, letter_vec).dot(stotal)
 
 """
 Tries to find a space in:
