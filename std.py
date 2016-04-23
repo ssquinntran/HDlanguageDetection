@@ -46,24 +46,26 @@ def subtract(lang_vec, s):
 Picks out n-grams of size c with > 1 std frequency and subtracts them
 from the language vector. Saves these n-grams as vocab
 """
-def filter(lang_vec, n_gram_frequencies, vocab):
+def filter(lang_vec, n_gram_frequencies):
 	arr = np.array([v for k,v in n_gram_frequencies.items()])
 	std = np.std(arr)
 	mean = np.mean(arr)
 	cutoff = mean + std
+	vocab = []
 	for k, v in n_gram_frequencies.items():
 		if v > cutoff:
-			vocab.add(k)
+			vocab.append(k)
 			subtract(lang_vec, k)
 			n_gram_frequencies.remove(k)
-
+	return vocab
 
 def explain_away(filepath="preprocessed_texts/AliceInWonderland.txt"):
 	lv, lang_vectors, n_gram_frequencies = load_all(filepath)
 	max_cluster_size = len(lang_vectors)
-	vocab = set()
+	#empty inner array is for cluster size 0
+	vocab = [[]]
 	for c in range(0,max_cluster_size):
-		filter(lang_vectors[c], n_gram_frequencies[c], lv, vocab)
+		vocab.append(filter(lang_vectors[c], n_gram_frequencies[c], lv))
 	return lang_vectors, n_gram_frequencies, vocab
 
 
