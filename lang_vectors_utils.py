@@ -19,14 +19,14 @@ alphabet = string.lowercase + ' '
 
 # create language vector for Alice in Wonderland made of summed n-gram vectors for each
 # n in cluster_sizes
-def create_lang_vec(filename, cluster_sizes, N=N, k=k):
+def create_lang_vec(filename, lv, cluster_sizes, N=N, k=k):
     
     total_lang = np.zeros((1,N))
     # generate english vector
     for cz in cluster_sizes:
         print "generating language vector of cluster size", cz
         # which alphabet to use
-        lang_vector = random_idx.generate_RI_text_fast(N, alphabet, cz, ordered, filename, alphabet)#"preprocessed_texts/AliceInWonderland.txt", alph)
+        lang_vector = random_idx.generate_RI_text_fast(N, lv, cz, ordered, filename, alphabet)#"preprocessed_texts/AliceInWonderland.txt", alph)
         total_lang += lang_vector
     return total_lang
 
@@ -43,7 +43,7 @@ def initialize(filepath="preprocessed_texts/alice-only-spaced.txt"):#AliceInWond
     # lang_vectors in sizes 1-8
     lang_vectors = []
     for size in cluster_sizes:
-        lang_vectors.append(create_lang_vec(filepath,[size]))
+        lang_vectors.append(create_lang_vec(filepath, lv, [size]))
     lang_vectors.insert(0, np.zeros((1,N)))
 
     # save vectors to file
