@@ -23,27 +23,50 @@ def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/alice-
     text = f.read();
     text = ''.join([x for x in text if x in alphabet])[0:10000];
     f.close()
-    processing = "" #leftovers because windows are disjoint (for now)
-    #should not be disjoint. the union would be quickly diminished by lookup. lel
+    processing = "" #leftovers 
+    #disjoint windows because processing will handle the rest
     #window of 20 letters
-    #let's do disjoint windows instead
 
     i = 0
     for i in range(0,(len(text)/20)*20,20):
     	window = text[i:i+20]
     	#theoretically less words than you think bc a lot of repeat words
-    	for j in range(0,len(vocab_array),-1):
+    	for j in range(1,len(vocab_array),-1):
     		for k,v in vocab_array[j+1].items():
     			windex = window.find(k)
     			if windex > -1
     				vocab_array[j+1][k] += 1
-    				#need to check if windex+1 is in bounds
-    				window = window[:windex] + window[windex+1:]
-    	processing += window
-    #edge case. possibly not enough
-    for i in range(0,len(text)):
+    				#word at the beginning
+    				if windex == 0:
+    					window = window[windex+len(k):]
+    				elif windex + len(k) == len(window):
+    				#word at the end
+    					window = window[:windex]
+    				else:
+    					window = window[:windex] + " " window[windex+len(k):]
+    	#handle case of 1 letter words:
+    	new_window = ""
+    	for l in range(1,len(window)-1):
+    		temp = window[l-1:l+1]
+    		if temp.count(" ") == 2:
+    			vocab_array[j+1][k] += 1
+    			new_window += window[l+1:]
+    	processing += new_window
+    #processing has spaces
+    #edge case. overlap and new words
+    for i in range(1,len(vocab_array),-1):
+    	for k in vocab_array[i]:
+    		pindex = processing.find(k)
+    		if pindex > -1:
+    			processing = processing[:pindex] + processing[pindex+len(k):]
+    #if there are any words that aren't explained away, run em to decide what exactly is a word. 
+    #don't include 1 letter words for now bc they're very popular and are probably already explained away
+    #1 letter words may leave gaps in actual undiscovered words though
+    #how can you tell if actual 1 letter word?
+    #we should do 1-2 letter words separately.
+    em_discover_words(processing, vocab_dict,max_length,filepath)
 
-
+def em_discover_words(processing, vocab_dict,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
 
 def vec_explain_away(vocab_vec,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
 	f = open(filepath, "r");
