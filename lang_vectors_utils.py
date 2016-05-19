@@ -78,7 +78,41 @@ def get_letter_vec(s, letter_vec):
         vec = np.multiply(np.roll(vec, 1), letter_vec[alphabet.index(i)]);
     return vec;
 
-
 def recover_frequency(letter_vec, s, array):
     vec = get_letter_vec(s, letter_vec);
     return np.dot(vec, array[len(s)-1]);
+#should we separate by cluster sizes? following precedent, guess not
+def vocab_vector(lv, lang_vectors, filepath="preprocessed_texts/alice-only-spaced.txt"):
+    f = open(filepath, "r");
+    text = f.read()
+    text = text.split(" ")
+    #text = ''.join([x for x in text if x in alphabet])[0:10000];
+    vocab_vec = np.zeros((1,N))
+    max_length = 0
+    for word in text:
+        print "generating vocab vector of cluster size", len(word)
+        word_vec = random_idx.id_vector(N, word, alphabet, lv, ordered)
+        vocab_vec += word_vec
+        if len(word) > max_length:
+            max_length = len(word)
+    f.close()
+    return vocab_vec, max_length
+#array with cluster size as index, the dictionary of words in that index
+def vocab_array(filepath="preprocessed_texts/alice-only-spaced.txt"):
+    f = open(filepath, "r");
+    text = f.read();
+    text = text.split(" ")
+    #text = ''.join([x for x in text if x in alphabet])[0:10000];
+    #max word length is 20 letters lol
+    vocab_array = [{} for i in range(0,20)]
+
+    max_length = 0
+    for word in text:
+        if word not in vocab_array[len(word)].keys():
+            vocab_array[len(word)][word] = 1
+        else:
+            vocab_array[len(word)][word] += 1
+        if len(word) > max_length:
+            max_length = len(word)
+    f.close()
+    return vocab_array, max_length
