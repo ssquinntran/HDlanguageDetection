@@ -90,7 +90,7 @@ def vocab_vector(lv, lang_vectors, filepath="preprocessed_texts/alice-only-space
     vocab_vec = np.zeros((1,N))
     max_length = 0
     for word in text:
-        print "generating vocab vector of cluster size", len(word)
+        #print "generating vocab vector of cluster size", len(word)
         word_vec = random_idx.id_vector(N, word, alphabet, lv, ordered)
         vocab_vec += word_vec
         if len(word) > max_length:
