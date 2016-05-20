@@ -2,16 +2,16 @@ import numpy as np
 import string
 import collections
 import pickle
-import random_idx
-import log_random_idx
-import log_lang_vectors as ll
+from ..utils import random_idx
+from ..utils import log_random_idx
+from ..utils import log_lang_vectors as ll
 
 #arbitrarily setting divisions up to unigrams
 divisions = 254
 num_partitions = 2**divisions
 partition_window = 30
 alphabet = string.lowercase+" "
-filepath = "preprocessed_texts/alice-only-stream.txt"
+filepath = "../preprocessed_texts/alice-only-stream.txt"
 k = 5000
 N = 30000;
 ordered = 1
@@ -154,7 +154,7 @@ def dp_solution(text, divisions=divisions):
 	# empty dict first
 	freqs = [initialize_freqs(text, cluster_sizes)]
 	# print freqs
-	file = open("spaced_out", "w")
+	file = open("../output/spaced_out", "w")
 	partition_text = [text]
 	for i in range(0,divisions):
 		print "division %d" % i
@@ -227,7 +227,7 @@ def dp_solution2(text, divisions=divisions):
 		freqs.append({})
 	lang_vec = create_lang_vec(cluster_sizes, text, freqs, N=N, k=k)
 
-	file = open("spaced_out2.txt", "w")
+	file = open("../output/spaced_out2.txt", "w")
 	partition_text = [text]
 	for i in range(0,divisions):
 		print "division %d" % i

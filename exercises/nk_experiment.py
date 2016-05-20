@@ -2,8 +2,8 @@
 # set of experiments using random_idx
 
 # libraries
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import sys
 import scipy.io as scio
 import numpy as np

@@ -11,7 +11,7 @@ import os
 from iv_structure.infinite_vectors import Vector
 
 alphabet = string.lowercase + " "
-lang_dir = './preprocessed_texts/'
+lang_dir = '../preprocessed_texts/'
 
 cluster_cache = {}
 

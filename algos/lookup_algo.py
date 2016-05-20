@@ -1,12 +1,12 @@
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import numpy as np
 import string
 import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
 import sys
-import lang_vectors_utils as lvu
+from ..utils import lang_vectors_utils as lvu
 
 k = 5000
 N = 10000
@@ -18,7 +18,7 @@ ordered = 1
 #alph = 'abc' 
 alphabet = string.lowercase + ' '
 
-def vec_explain_away(vocab_vec,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
+def vec_explain_away(vocab_vec,max_length,filepath="../preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r");
     text = f.read();
     text = text.split(" ")
@@ -34,7 +34,7 @@ def update_unigrams(vocab_array, text):
                 vocab_array[1][word] += 1
             #do something about discovering unigrams
 
-def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
+def array_explain_away(vocab_dict,max_length,filepath="../preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r")
     text = f.read()
     #text = ''.join([x for x in text if x in alphabet])[0:10000]
@@ -110,7 +110,7 @@ if there are any words that aren't explained away, run em to decide what exactly
 #denominators all the same so just compare ngrams with the same size
 #for each phrase, determine words as you run through text again. max step
 """
-def hard_em_discover_words(processing,vocab_array,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
+def hard_em_discover_words(processing,vocab_array,max_length,filepath="../preprocessed_texts/alice-only-spaced.txt"):
     all_words = processing.split(" ")
     new_words = set()
     new_phrases = [{} for i in range(0,len(vocab_array)+1)]
@@ -133,7 +133,7 @@ def hard_em_discover_words(processing,vocab_array,max_length,filepath="preproces
             processed += word + " "
     return processed
         
-filepath = "preprocessed_texts/alice-only-spaced.txt"
+filepath = "../preprocessed_texts/alice-only-spaced.txt"
 #lvu.initialize()
 lv, lang_vectors, n_gram_frequencies = lvu.initialize_from_file()
 vocab_vec, max_length = lvu.vocab_vector(lv, lang_vectors)
@@ -144,12 +144,12 @@ for i in range(0,len(vocab_array)):
         break
 
 aea = array_explain_away(vocab_array,max_length,filepath)
-file = open("processing_array_explain_away_results","w")
+file = open("../intermediate/processing_array_explain_away_results","w")
 file.write(aea)
 file.close()
 #now for the em
 hed = hard_em_discover_words(aea, vocab_array, max_length, filepath)
-file = open("processed_array_explain_away_results","w")
+file = open("../output/processed_array_explain_away_results","w")
 file.write(hed)
 file.close()
 

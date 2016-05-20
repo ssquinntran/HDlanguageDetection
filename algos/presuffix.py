@@ -1,8 +1,8 @@
 import numpy as np 
 import string
 import collections
-import random_idx
-import log_lang_vectors as llv
+from ..utils import random_idx
+from ..utils import log_lang_vectors as llv
 
 alphabet = string.lowercase+' ~'
 N = 100000
@@ -10,7 +10,7 @@ N = 100000
 
 def get_alice_space():
 	#filepath = "raw_texts/texts_english/alice_in_wonderland.txt"
-	filepath = "preprocessed_texts/alice-only-spaced.txt"
+	filepath = "../preprocessed_texts/alice-only-spaced.txt"
 	f = open(filepath, "r")
 	text = f.read().lower();
 	text = ''.join([x for x in text if x in alphabet])
@@ -122,9 +122,9 @@ def find_a_space(s, n):
 
 text = get_alice_space();
 try:
-	letter_vec = np.load("100k_presuf.p")
-	ptotal = np.load("alice_100k_pre.p")
-	stotal = np.load("alice_100k_suf.p");
+	letter_vec = np.load("../intermediate/100k_presuf.p")
+	ptotal = np.load("../intermediate/alice_100k_pre.p")
+	stotal = np.load("../intermediate/alice_100k_suf.p");
 except:
 	tot = suffix_gram(text, N, 3);
 	ptotal = stot[0]

@@ -12,8 +12,8 @@ excludes 1-grams (individual letters) of words that have 2
 or more letters.  How many N-grams are there anyway in an
 L-letter word? L-1?
 """
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import numpy as np
 import string
 import pandas as pd
@@ -33,7 +33,7 @@ alph = string.lowercase + ' '
 # n in cluster_sizes
 def create_full_words_vec(vocab_file, N=N, k=k):
     fread = open(vocab_file, "r")
-    fwrite = open("alice_full_words_vec", "w")
+    fwrite = open("../intermediate/alice_full_words_vec", "w")
     total_lang = np.zeros((1,N))
 
     for line in fread:
@@ -48,7 +48,7 @@ def create_full_words_vec(vocab_file, N=N, k=k):
 
 def create_substrings_vec(vocab_file, N=N, k=k):
     fread = open(vocab_file, "r")
-    fwrite = open("alice_substring_vec", "w")
+    fwrite = open("../intermediate/alice_substring_vec", "w")
     total_lang = np.zeros((1,N))
     
     for line in fread:
@@ -65,16 +65,16 @@ def create_substrings_vec(vocab_file, N=N, k=k):
 
 if __name__ == "__main__":
     #read from serialized files
-    fread = open("alice_RI_letters", "r")
+    fread = open("../intermediate/alice_RI_letters", "r")
     RI_letters = pickle.load(fread)
 
-    vocab_vec = create_full_words_vec("vocab.txt")
-    fread1 = open("alice_full_words_vec", "r")
+    vocab_vec = create_full_words_vec("../intermediate/vocab.txt")
+    fread1 = open("../intermediate/alice_full_words_vec", "r")
     vocab_vec = pickle.load(fread1)
     print(vocab_vec)
 
-    substring_vec = create_substrings_vec("vocab.txt")
-    fread2 = open("alice_substring_vec", "r")
+    substring_vec = create_substrings_vec("../intermediate/vocab.txt")
+    fread2 = open("../intermediate/alice_substring_vec", "r")
     substring_vec = pickle.load(fread2)
     print(substring_vec)
 

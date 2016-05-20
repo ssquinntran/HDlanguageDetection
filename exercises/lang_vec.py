@@ -1,5 +1,5 @@
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import numpy as np
 import string
 import pandas as pd
@@ -26,7 +26,7 @@ def create_lang_vec(cluster_sizes, N=N, k=k):
     for cz in cluster_sizes:
         print "generating language vector of cluster size", cz
         # which alphabet to use
-        lang_vector = random_idx.generate_RI_text_fast(N, RI_letters, cz, ordered, "preprocessed_texts/AliceInWonderland.txt", alph)
+        lang_vector = random_idx.generate_RI_text_fast(N, RI_letters, cz, ordered, "../preprocessed_texts/AliceInWonderland.txt", alph)
         total_lang += lang_vector
     return total_lang
 
@@ -48,8 +48,8 @@ def create_lang_vec(cluster_sizes, N=N, k=k):
 # fwrite1.close()
 
 #read from serialized files
-fread = open("alice_RI_letters", "r")
-fread1 = open("alice_lang_vectors", "r")
+fread = open("../intermediate/alice_RI_letters", "r")
+fread1 = open("../intermediate/alice_lang_vectors", "r")
 RI_letters = pickle.load(fread)
 lang_vectors = pickle.load(fread1)
 fread.close()
@@ -61,7 +61,7 @@ qu_vector = random_idx.id_vector(N, "qu", alph, RI_letters, ordered)
 
 #qu_vector = np.add(RI_letters[alph.find("u")], np.roll(RI_letters[alph.find("q")], 1))
 if __name__ == "__main__":
-    f = open("exercise_results.txt", "w")
+    f = open("../output/exercise_results.txt", "w")
     f.write("Take the language vector representing single letters of\n\
     Alice and compute its dot product with the 26 different\n\
     letter vectors.  Can you see a relation between the dot\n\

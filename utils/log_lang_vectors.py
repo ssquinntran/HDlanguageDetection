@@ -69,7 +69,7 @@ def recover_frequency(letter_vec, s, array):
 	vec = get_letter_vec(s, letter_vec);
 	return np.dot(vec, array[len(s)-1]);
 
-def initialize(filepath="preprocessed_texts/AliceInWonderland.txt"):
+def initialize(filepath="../preprocessed_texts/AliceInWonderland.txt"):
 	n_grams = []
 	lv = random_idx.generate_letter_id_vectors(N,15000);
 	f = open(filepath, "r");
@@ -85,9 +85,9 @@ def initialize(filepath="preprocessed_texts/AliceInWonderland.txt"):
 	lang_vectors.insert(0, np.zeros((1,N)))
 
 	# save vectors to file
-	fwrite = open("lv", "w")
-	fwrite1 = open("log_lang_vectors", "w")
-	fwrite2 = open("n_gram_frequencies", "w")
+	fwrite = open("../intermediate/lv", "w")
+	fwrite1 = open("../intermediate/log_lang_vectors", "w")
+	fwrite2 = open("../intermediate/n_gram_frequencies", "w")
 	pickle.dump(lv, fwrite)
 	pickle.dump(lang_vectors, fwrite1)
 	pickle.dump(n_gram_frequencies, fwrite2)
@@ -95,7 +95,7 @@ def initialize(filepath="preprocessed_texts/AliceInWonderland.txt"):
 	fwrite1.close()
 	fwrite2.close()
 
-def training_set(filepath="preprocessed_texts/alice-only-spaced.txt"):
+def training_set(filepath="../preprocessed_texts/alice-only-spaced.txt"):
 	n_grams = []
 	lv = random_idx.generate_letter_id_vectors(N,15000);
 	f = open(filepath, "r");
@@ -111,9 +111,9 @@ def training_set(filepath="preprocessed_texts/alice-only-spaced.txt"):
 	lang_vectors.insert(0, np.zeros((1,N)))
 
 	# save vectors to file
-	fwrite = open("train_lv", "w")
-	fwrite1 = open("train_log_lang_vectors", "w")
-	fwrite2 = open("train_n_gram_frequencies", "w")
+	fwrite = open("../intermediate/train_lv", "w")
+	fwrite1 = open("../intermediate/train_log_lang_vectors", "w")
+	fwrite2 = open("../intermediate/train_n_gram_frequencies", "w")
 	pickle.dump(lv, fwrite)
 	pickle.dump(lang_vectors, fwrite1)
 	pickle.dump(n_gram_frequencies, fwrite2)

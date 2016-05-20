@@ -11,7 +11,7 @@ import os
 import random_idx
 import math
 alphabet = string.lowercase + " "
-lang_dir = './preprocessed_texts/'
+lang_dir = '../preprocessed_texts/'
 
 cluster_cache = {}
 

@@ -2,9 +2,9 @@ import numpy as np
 import string
 import collections
 import pickle
-import random_idx
-import log_random_idx
-import log_lang_vectors as llv
+from ..utils import random_idx
+from ..utils import log_random_idx
+from ..utils import log_lang_vectors as llv
 
 """
 This is an exercise to calculate the standard deviation as post processing for the
@@ -22,10 +22,10 @@ N = 30000;
 ordered = 1
 
 cluster_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-def load_all(filepath="preprocessed_texts/AliceInWonderland.txt"):
-	fread = open("lv", "r")
-	fread1 = open("log_lang_vectors", "r")
-	fwrite2 = open("n_gram_frequencies", "r")
+def load_all(filepath="../preprocessed_texts/AliceInWonderland.txt"):
+	fread = open("../intermediate/lv", "r")
+	fread1 = open("../intermediate/log_lang_vectors", "r")
+	fwrite2 = open("../intermediate/n_gram_frequencies", "r")
 	lv = pickle.load(fread)
 	lang_vectors = pickle.load(fread1)
 	n_gram_frequencies = pickle.load(fread2)
@@ -59,7 +59,7 @@ def filter(lang_vec, n_gram_frequencies):
 			n_gram_frequencies.remove(k)
 	return vocab
 
-def explain_away(filepath="preprocessed_texts/AliceInWonderland.txt"):
+def explain_away(filepath="../preprocessed_texts/AliceInWonderland.txt"):
 	lv, lang_vectors, n_gram_frequencies = load_all(filepath)
 	max_cluster_size = len(lang_vectors)
 	#empty inner array is for cluster size 0

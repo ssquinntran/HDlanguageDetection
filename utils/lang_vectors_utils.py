@@ -1,5 +1,5 @@
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import numpy as np
 import string
 import pandas as pd
@@ -30,7 +30,7 @@ def create_lang_vec(filename, lv, cluster_sizes, N=N, k=k):
         total_lang += lang_vector
     return total_lang
 
-def initialize(filepath="preprocessed_texts/alice-only-spaced.txt"):#AliceInWonderland.txt"):
+def initialize(filepath="../preprocessed_texts/alice-only-spaced.txt"):#AliceInWonderland.txt"):
     n_grams = []
     # RI_letters = random_idx.generate_letter_id_vectors(N, k, alph)
     lv = random_idx.generate_letter_id_vectors(N,15000);
@@ -47,9 +47,9 @@ def initialize(filepath="preprocessed_texts/alice-only-spaced.txt"):#AliceInWond
     lang_vectors.insert(0, np.zeros((1,N)))
 
     # save vectors to file
-    fwrite = open("lv", "w")
-    fwrite1 = open("lang_vectors", "w")
-    fwrite2 = open("n_gram_frequencies", "w")
+    fwrite = open("../intermediate/lv", "w")
+    fwrite1 = open("../intermediate/lang_vectors", "w")
+    fwrite2 = open("../intermediate/n_gram_frequencies", "w")
     pickle.dump(lv, fwrite)
     pickle.dump(lang_vectors, fwrite1)
     pickle.dump(n_gram_frequencies, fwrite2)
@@ -59,9 +59,9 @@ def initialize(filepath="preprocessed_texts/alice-only-spaced.txt"):#AliceInWond
 
 def initialize_from_file():
     # save vectors to file
-    fread = open("lv", "r")
-    fread1 = open("lang_vectors", "r")
-    fread2 = open("n_gram_frequencies", "r")
+    fread = open("../intermediate/lv", "r")
+    fread1 = open("../intermediate/lang_vectors", "r")
+    fread2 = open("../intermediate/n_gram_frequencies", "r")
     lv = pickle.load(fread)
     lang_vectors = pickle.load(fread1)
     n_gram_frequencies = pickle.load(fread2)
@@ -82,7 +82,7 @@ def recover_frequency(letter_vec, s, array):
     vec = get_letter_vec(s, letter_vec);
     return np.dot(vec, array[len(s)-1]);
 #should we separate by cluster sizes? following precedent, guess not
-def vocab_vector(lv, lang_vectors, filepath="preprocessed_texts/alice-only-spaced.txt"):
+def vocab_vector(lv, lang_vectors, filepath="../preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r");
     text = f.read()
     text = text.split(" ")
@@ -98,7 +98,7 @@ def vocab_vector(lv, lang_vectors, filepath="preprocessed_texts/alice-only-space
     f.close()
     return vocab_vec, max_length
 #array with cluster size as index, the dictionary of words in that index
-def vocab_array(filepath="preprocessed_texts/alice-only-spaced.txt"):
+def vocab_array(filepath="../preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r");
     text = f.read();
     text = text.split(" ")

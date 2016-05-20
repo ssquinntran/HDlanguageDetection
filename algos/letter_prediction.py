@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pickle
 import sys
 import Queue
-import lang_vec
+from ..exercises import lang_vec
 
 k = 5000
 N = 10000
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     #f = open("letter_prediction_results_added.txt", "w")
     #f = open("letter_prediction_results_clipped_binary.txt", "w")
     #f = open("letter_prediction_results_w_alphabet_clipped.txt", "w")
-    f = open("letter_prediction_results_predict2.txt", "w")
+    f = open("../output/letter_prediction_results_predict2.txt", "w")
     for word in search_words:
         for i in range(0, len(word)-1):
             #queue = predict(word[0:i+1], i+1, lang_vectors[i+1])

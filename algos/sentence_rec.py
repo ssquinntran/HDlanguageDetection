@@ -2,21 +2,21 @@
 # experiment to test language identification on fixed corpus
 
 # libraries
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import sys
 import scipy.io as scio
 import numpy as np
 import glob
 import os
 from tqdm import trange
-from text_cleaner import cleaner
+from ..utils import text_cleaner
 import codecs
 import locale
 
 # important directories
 main_base = os.getcwd()
-test_dir = '/lang_texts/test/processed_test'
+test_dir = '../lang_texts/test/processed_test'
 
 # parameters
 Ns = [10000] # dimension of random index vectors
@@ -76,7 +76,7 @@ for N in Ns:
 							while True:
 								sentence = raw_input().decode(sys.stdin.encoding or locale.getpreferredencoding(True))
 								unknown_tots = []
-								sentence = cleaner(sentence)
+								sentence = text_cleaner.cleaner(sentence)
 								unknown_vector = random_idx.generate_RI_sentence(N, RI_letters, cluster_sz, ordered,sentence)
 								unknown_tots.append(unknown_vector)
 								final_unknown = sum(unknown_tots)

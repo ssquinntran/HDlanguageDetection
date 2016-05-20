@@ -2,13 +2,13 @@ import numpy as np
 import string
 import collections
 import pickle
-import random_idx
-import log_random_idx
+from ..utils import random_idx
+from ..utils import log_random_idx
 
 #read from serialized files
-fread = open("lv", "r")
-fread1 = open("log_lang_vectors", "r")
-fread2 = open("n_gram_frequencies", "r")
+fread = open("../intermediate/lv", "r")
+fread1 = open("../intermediate/log_lang_vectors", "r")
+fread2 = open("../intermediate/n_gram_frequencies", "r")
 lv = pickle.load(fread)
 lang_vectors = pickle.load(fread1)
 n_gram_frequencies = pickle.load(fread2)
@@ -16,7 +16,7 @@ fread.close()
 fread1.close()
 fread2.close()
 alphabet = string.lowercase+" "
-filepath = "preprocessed_texts/AliceInWonderland.txt"
+filepath = "../preprocessed_texts/AliceInWonderland.txt"
 k = 5000
 N = 30000;
 ordered = 1
@@ -56,7 +56,7 @@ def determine_space(text, window_size, n_gram_frequencies):
 	#choosing an arbitary threshold right now
 	#threshold = .001
 	#print text
-	fwrite = open("alice_with_spaces.txt", "w")
+	fwrite = open("../preprocessed_texts/alice_with_spaces.txt", "w")
 	for i in range(0,(text_size//window_size)*window_size,window_size):
 		window = text[i:i+window_size]
 		#print window

@@ -1,8 +1,8 @@
 import numpy as np
 import string
 import collections
-import random_idx
-import log_random_idx
+from ..utils import random_idx
+from ..utils import log_random_idx
 
 alphabet = string.lowercase+" "
 filepath = "preprocessed_texts/AliceInWonderland.txt"

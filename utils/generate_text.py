@@ -1,5 +1,5 @@
-import random_idx
-import utils
+from ..utils import random_idx
+from ..utils import utils
 import numpy as np
 import string
 import pandas as pd

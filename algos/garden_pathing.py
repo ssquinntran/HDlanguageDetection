@@ -2,13 +2,13 @@ import numpy as np
 import string
 import collections
 import pickle
-import random_idx as ri
-import log_random_idx as lri
-import log_lang_vectors as llv
+from ..utils import random_idx as ri
+from ..utils import log_random_idx as lri
+from ..utils import log_lang_vectors as llv
 from copy import deepcopy
 
 alphabet = string.lowercase+" "
-filepath = "raw_texts/texts_english/alice_in_wonderland.txt"
+filepath = "../raw_texts/texts_english/alice_in_wonderland.txt"
 N = 100000;
 f = open(filepath, "r");
 text = f.read().lower();
@@ -154,23 +154,23 @@ def wrapper_garden(s, n, training = 0):
 
 
 try:
-	postprocessed_array1 = np.load('log/preprocessedngrams_100k.p')
-	lv1 = np.load('log/lv_100k.p')
+	postprocessed_array1 = np.load('../output/log/preprocessedngrams_100k.p')
+	lv1 = np.load('../output/log/lv_100k.p')
 except Exception as e:
 	lv1 = ri.generate_letter_id_vectors(N,N/2);
-	lv1.dump('log/lv_100k.p')
+	lv1.dump('../output/log/lv_100k.p')
 	postprocessed_array1 = np.array(llv.load_ngram_vector(text, lv1, 6)) #creates the array up to 5 grams
-	postprocessed_array1.dump('log/preprocessedngrams_100k.p');
+	postprocessed_array1.dump('../output/log/preprocessedngrams_100k.p');
 	print "finished generating"
 
 try:
-	postprocessed_array2 = np.load('log/preprocessedngrams_2_100k.p')
-	lv2 = np.load('log/lv_2_100k.p')
+	postprocessed_array2 = np.load('../output/log/preprocessedngrams_2_100k.p')
+	lv2 = np.load('../output/log/lv_2_100k.p')
 except Exception as e:
 	lv2 = ri.generate_letter_id_vectors(N,N/2);
-	lv2.dump('log/lv_2_100k.p')
+	lv2.dump('../output/log/lv_2_100k.p')
 	postprocessed_array2 = np.array(llv.load_ngram_vector(text, lv2, 6)) #creates the array up to 5 grams
-	postprocessed_array2.dump('log/preprocessedngrams_2_100k.p');
+	postprocessed_array2.dump('../output/log/preprocessedngrams_2_100k.p');
 	print "finished generating"
 
 # n = random_idx.generate_letter_id_vectors(10, 6)
