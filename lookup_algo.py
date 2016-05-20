@@ -21,16 +21,18 @@ alphabet = string.lowercase + ' '
 def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r")
     text = f.read()
-    text = ''.join([x for x in text if x in alphabet])[0:10000]
+    #text = ''.join([x for x in text if x in alphabet])[0:10000]
     f.close()
     processing = "" #leftovers 
     #unioned windows and processing will handle the rest
     #window of 20 letters
-
+    #add padding to fit window
+    num_padds = len(text)%20
+    pads = " " * num_padds
+    text += pads
     i = 0
     for i in range(0,(len(text)/20)*20):
         window = text[i:i+20]
-        print window
         #theoretically less words than you think bc a lot of repeat words
         for j in range(1,len(vocab_array),-1):
             for k,v in vocab_array[j+1].items():
@@ -39,35 +41,29 @@ def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/alice-
                     vocab_array[j+1][k] += 1
                     #word at the beginning
                     if windex == 0:
-                        window = window[windex+len(k):]
+                        window = k + " " + window[windex+len(k):]
                     elif windex + len(k) == len(window):
                     #word at the end
-                        window = window[:windex]
+                        window = window[:windex] + " " + k
                     else:
                         window = window[:windex] + " " + window[windex+len(k):]
         #how lame
         if len(window) > 0:
             processing += window[0]
-    #edge case
-    window = text[(len(text)/20)*20:len(text)]
-    for i in range(1,len(vocab_array)-1):
-        for k,v in vocab_array[i+1].items():
-            windex = window.find(k)
-            if windex > -1:
-                    vocab_array[j+1][k] += 1
-                    #word at the beginning
-                    if windex == 0:
-                        window = window[windex+len(k):]
-                    elif windex + len(k) == len(window):
-                    #word at the end
-                        window = window[:windex]
-                    else:
-                        window = window[:windex] + " " + window[windex+len(k):]
-        #how lame
-        if len(window) > 0:
-            processing += window[0]
+    # apparently case of 1 letter words implicitly handled
+    # can do a count to keep frequencies consistent
+    update_unigrams()
     return processing
-    
+def update_unigrams():
+            #handle case of 1 letter words:
+        new_window = ""
+        for l in range(1,len(window)-1):
+            temp = window[l-1:l+1]
+            if temp.count(" ") == 2:
+                vocab_array[j+1][k] += 1
+                new_window += window[l+1:]
+        processing += new_window
+    #processing has spaces
 #lvu.initialize()
 lv, lang_vectors, n_gram_frequencies = lvu.initialize_from_file()
 vocab_vec, max_length = lvu.vocab_vector(lv, lang_vectors)
@@ -84,16 +80,7 @@ file.close()
 
 
 
-    """
-        #handle case of 1 letter words:
-        new_window = ""
-        for l in range(1,len(window)-1):
-            temp = window[l-1:l+1]
-            if temp.count(" ") == 2:
-                vocab_array[j+1][k] += 1
-                new_window += window[l+1:]
-        processing += new_window
-    #processing has spaces
+"""
    
     #if there are any words that aren't explained away, run em to decide what exactly is a word. 
     #don't include 1 letter words for now bc they're very popular and are probably already explained away
