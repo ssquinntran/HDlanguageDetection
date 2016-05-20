@@ -148,9 +148,9 @@ file = open("processing_array_explain_away_results","w")
 file.write(aea)
 file.close()
 #now for the em
-aea = hard_em_discover_words(aea, vocab_array, max_length, filepath)
+hed = hard_em_discover_words(aea, vocab_array, max_length, filepath)
 file = open("processed_array_explain_away_results","w")
-file.write(aea)
+file.write(hed)
 file.close()
 
     
