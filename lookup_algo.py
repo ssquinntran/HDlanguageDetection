@@ -18,12 +18,28 @@ ordered = 1
 #alph = 'abc' 
 alphabet = string.lowercase + ' '
 
+def vec_explain_away(vocab_vec,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
+    f = open(filepath, "r");
+    text = f.read();
+    text = text.split(" ")
+    #text = ''.join([x for x in text if x in alphabet])[0:10000];
+    f.close()
+
+def update_unigrams(vocab_array, text):
+    #handle case of 1 letter words:
+    copy = text.split(" ")
+    for word in copy:
+        if len(word) == 1:
+            if word in vocab_array[1].keys():
+                vocab_array[1][word] += 1
+            #do something about discovering unigrams
+
 def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r")
     text = f.read()
     #text = ''.join([x for x in text if x in alphabet])[0:10000]
     f.close()
-    processing = "" #leftovers 
+    processing = "" 
     #unioned windows and processing will handle the rest
     #window of 20 letters
     #add padding to fit window
@@ -52,18 +68,72 @@ def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/alice-
             processing += window[0]
     # apparently case of 1 letter words implicitly handled
     # can do a count to keep frequencies consistent
-    update_unigrams()
+    update_unigrams(vocab_array,text)
     return processing
-def update_unigrams():
-            #handle case of 1 letter words:
-        new_window = ""
-        for l in range(1,len(window)-1):
-            temp = window[l-1:l+1]
-            if temp.count(" ") == 2:
-                vocab_array[j+1][k] += 1
-                new_window += window[l+1:]
-        processing += new_window
-    #processing has spaces
+
+#doesn't consider words we've already known. compound words and/or similar words may be awko taco
+def hard_e_step(word,new_phrases):
+    for cluster_sz in range(0,len(word)):
+            #edge case handled in windowing starting from left
+            for i in range(0,(len(word)/cluster_sz)*cluster_sz):
+                temp = word[i:i+cluster_sz]
+                if temp not in new_phrases[cluster_sz].keys():
+                    new_phrases[cluster_sz][temp] = 1
+                else:
+                    new_phrases[cluster_sz][temp] += 1
+#returns split or not split word depending on location of most popular prefix of word
+#denominators all the same per cluster size
+#records frequencies and word(s) in vocab_array
+def hard_m_step(word,new_phrases,vocab_array):
+    prefindex = {}
+    for i in range(0,len(word)):
+        prefindex[i] = 1
+        #tailored cluster size
+        for j in range(i+1,len(word)):
+            prefindex[i] *= new_phrases[len(word[j:])][word[j:]]
+    #find max and break ties by prioritizing longer string aka smaller index
+    freq = 0
+    index = 0
+    for k,v in prefindex.items():
+        if v > freq:
+            freq = v
+            index = k
+        if v == freq and k < index:
+            index = k
+    if k > 0 and k < len(word)-1:
+        return [word[:index],word[index:]]
+    return [word]
+
+"""
+if there are any words that aren't explained away, run em to decide what exactly is a word. 
+#include 1 letter words LATER for now bc they're very popular and are probably already explained away
+#denominators all the same so just compare ngrams with the same size
+#for each phrase, determine words as you run through text again. max step
+"""
+def hard_em_discover_words(processing,vocab_array,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
+    all_words = processing.split(" ")
+    new_words = set()
+    new_phrases = [{} for i in range(0,len(vocab_array)+1)]
+    processed = ""
+    for word in all_words:
+        if word not in vocab_array[len(word)].keys():
+            new_words.add(word)
+            hard_e_step(word,new_phrases)
+
+    for word in all_words:
+        if word in new_words and word not in vocab_array[len(word)].keys():
+            ws = hard_m_step(word,new_phrases,vocab_array)
+            for w in ws:
+                vocab_array[len(w)][w] = 1
+                processed += ws + " "
+        elif word in new_words: #if repeated discovered word
+            processed += word + " "
+            vocab_array[len(word)][word] += 1
+        else: #if already known word
+            processed += word + " "
+    return processed
+        
+filepath = "preprocessed_texts/alice-only-spaced.txt"
 #lvu.initialize()
 lv, lang_vectors, n_gram_frequencies = lvu.initialize_from_file()
 vocab_vec, max_length = lvu.vocab_vector(lv, lang_vectors)
@@ -72,31 +142,22 @@ for i in range(0,len(vocab_array)):
     if not vocab_array[i].keys():
         vocab_array = vocab_array[:i]
         break
-aea = array_explain_away(vocab_array,max_length,"preprocessed_texts/alice-only-spaced.txt")
-file = open("array_explain_away_results","w")
+
+aea = array_explain_away(vocab_array,max_length,filepath)
+file = open("processing_array_explain_away_results","w")
 file.write(aea)
 file.close()
+#now for the em
+aea = hard_em_discover_words(aea, vocab_array, max_length, filepath)
+file = open("processed_array_explain_away_results","w")
+file.write(aea)
+file.close()
+
     
 
 
 
-"""
-   
-    #if there are any words that aren't explained away, run em to decide what exactly is a word. 
-    #don't include 1 letter words for now bc they're very popular and are probably already explained away
-    #1 letter words may leave gaps in actual undiscovered words though
-    #how can you tell if actual 1 letter word?
-    #we should do 1-2 letter words separately.
-    em_discover_words(processing, vocab_dict,max_length,filepath)
-"""
-def em_discover_words(processing, vocab_dict,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
-    pass
-def vec_explain_away(vocab_vec,max_length,filepath="preprocessed_texts/alice-only-spaced.txt"):
-    f = open(filepath, "r");
-    text = f.read();
-    text = text.split(" ")
-    #text = ''.join([x for x in text if x in alphabet])[0:10000];
-    f.close()
+
 
 
 
