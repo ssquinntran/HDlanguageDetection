@@ -12,8 +12,8 @@ excludes 1-grams (individual letters) of words that have 2
 or more letters.  How many N-grams are there anyway in an
 L-letter word? L-1?
 """
-from ..utils import random_idx
-from ..utils import utils
+import random_idx
+import utils
 import numpy as np
 import string
 import pandas as pd

@@ -1,6 +1,6 @@
 import re
 
-file = open('../raw_texts/texts_english/alice_in_wonderland.txt', 'r')
+file = open('raw_texts/texts_english/alice_in_wonderland.txt', 'r')
 # .lower() returns a version with all upper case characters replaced with lower case characters.
 text = file.read().lower()
 file.close()

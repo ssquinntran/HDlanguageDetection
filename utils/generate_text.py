@@ -1,11 +1,12 @@
-from ..utils import random_idx
-from ..utils import utils
+import random_idx
+import utils
 import numpy as np
 import string
 import pandas as pd
 import matplotlib.pyplot as plt
 
 k = 5000
+N = 10000
 cluster_sz = [3]
 ordered = 1
 #alph = 'abc' 

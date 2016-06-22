@@ -27,7 +27,7 @@ varys = []
 try:
 		unknown_txt = sys.argv[1]
 except IndexError:
-		unknown_txt = '../preprocessed_texts/unknown1.txt'
+		unknown_txt = 'preprocessed_texts/unknown1.txt'
 
 try:
 		new_RI = sys.argv[2]

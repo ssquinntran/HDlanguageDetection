@@ -10,7 +10,7 @@ import pandas as pd
 import os
 
 alphabet = string.lowercase + " "
-lang_dir = '../preprocessed_texts/'
+lang_dir = 'preprocessed_texts/'
 
 cluster_cache = {}
 
