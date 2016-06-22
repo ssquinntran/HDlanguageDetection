@@ -37,7 +37,7 @@ def update_unigrams(vocab_array, text):
                 vocab_array[1][word] += 1
             #do something about discovering unigrams
 
-def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/english/alice-only-spaced.txt"):
+def dict_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/english/alice-only-spaced.txt"):
     f = open(filepath, "r")
     text = f.read()
     #text = ''.join([x for x in text if x in alphabet])[0:10000]
@@ -53,11 +53,11 @@ def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/englis
     for i in range(0,(len(text)/20)*20):
         window = text[i:i+20]
         #theoretically less words than you think bc a lot of repeat words
-        for j in range(1,len(vocab_array),-1):
-            for k,v in vocab_array[j+1].items():
+        for j in range(1,len(vocab_dict),-1):
+            for k,v in vocab_dict[j+1].items():
                 windex = window.find(k)
                 if windex > -1:
-                    vocab_array[j+1][k] += 1
+                    vocab_dict[j+1][k] += 1
                     #word at the beginning
                     if windex == 0:
                         window = k + " " + window[windex+len(k):]
@@ -71,7 +71,7 @@ def array_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/englis
             processing += window[0]
     # apparently case of 1 letter words implicitly handled
     # can do a count to keep frequencies consistent
-    update_unigrams(vocab_array,text)
+    update_unigrams(vocab_dict,text)
     return processing
 
 #doesn't consider words we've already known. compound words and/or similar words may be awko taco
@@ -139,14 +139,11 @@ def seed():
     filepath = "preprocessed_texts/english/alice-only-spaced.txt"
     #lvu.initialize()
     lv, lang_vectors, n_gram_frequencies = lvu.initialize_from_file()
-    vocab_vec, max_length = lvu.vocab_vector(lv, lang_vectors)
-    vocab_array, max_length = lvu.vocab_array()
-    for i in range(0,len(vocab_array)):
-        if not vocab_array[i].keys():
-            vocab_array = vocab_array[:i]
-            break
+    vocab_vec, max_word_length = lvu.vocab_vector(lv, lang_vectors)
+    vocab_dict = lvu.vocab_dict(max_word_length)
 
-    aea = array_explain_away(vocab_array,max_length,filepath)
+    filepath = "preprocessed_texts/english/a_christmas_carol.txt"
+    aea = dict_explain_away(vocab_dict,max_word_length,filepath)
     file = open("intermediate/processing_array_explain_away_results","w")
     file.write(aea)
     file.close()
@@ -159,20 +156,11 @@ def seed():
     #file.close()
 
     # save data to file
-    fwrite = open("intermediate/lookup_lv", "w")
-    fwrite1 = open("intermediate/lookup_lang_vectors", "w")
-    fwrite2 = open("intermediate/lookup_n_gram_frequencies", "w")
-    fwrite3 = open("intermediate/lookup_vocab_vec", "w")
-    fwrite4 = open("intermediate/lookup_vocab_array", "w")
-    pickle.dump(lv, fwrite)
-    pickle.dump(lang_vectors, fwrite1)
-    pickle.dump(n_gram_frequencies, fwrite2)
-    pickle.dump(vocab_vec, fwrite3)
-    pickle.dump(vocab_array, fwrite4)
-    fwrite.close()
-    fwrite1.close()
-    fwrite2.close()
-    fwrite3.close()
-    fwrite4.close()
+    lvu.write_data_structures([lv, lang_vectors, n_gram_frequencies, vocab_vec, vocab_dict], \
+        ["intermediate/lookup_lv", "intermediate/lookup_lang_vectors", \
+        "intermediate/lookup_n_gram_frequencies", "intermediate/lookup_vocab_vec", \
+        "intermediate/lookup_vocab_dict"])
+
+seed()
 
 

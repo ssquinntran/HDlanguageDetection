@@ -1,5 +1,5 @@
 import build_vocabulary
-import generate_text
+#import generate_text
 #import hyperdim
 import hypervec
 import lang_vectors_utils
