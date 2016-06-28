@@ -42,36 +42,36 @@ def dict_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/english
     text = f.read()
     #text = ''.join([x for x in text if x in alphabet])[0:10000]
     f.close()
-    processing = "" 
-    #unioned windows and processing will handle the rest
+    #unioned windows so text needs to know if window updated so text can pad with " "
     #window of 20 letters
     #add padding to fit window
+    print len(text)
     num_padds = len(text)%20
-    pads = " " * num_padds
+    pads = " " * (20-num_padds)
     text += pads
+    processing = []
     i = 0
     for i in range(0,(len(text)/20)*20):
         window = text[i:i+20]
+        #print window
         #theoretically less words than you think bc a lot of repeat words
-        for j in range(1,len(vocab_dict),-1):
-            for k,v in vocab_dict[j+1].items():
+        for j in range(len(vocab_dict)-1, -1,-1):
+
+            for k,v in vocab_dict[j].items():
                 windex = window.find(k)
                 if windex > -1:
-                    vocab_dict[j+1][k] += 1
+                    print k
+                    #vocab_dict[j][k] += 1
                     #word at the beginning
-                    if windex == 0:
-                        window = k + " " + window[windex+len(k):]
-                    elif windex + len(k) == len(window):
-                    #word at the end
-                        window = window[:windex] + " " + k
-                    else:
-                        window = window[:windex] + " " + window[windex+len(k):]
+                    window = window[:windex] + window[windex+len(k):]
+                    print window
         #how lame
-        if len(window) > 0:
-            processing += window[0]
+        #if len(window) > 0:
+        #    processing += window[0]
     # apparently case of 1 letter words implicitly handled
     # can do a count to keep frequencies consistent
-    update_unigrams(vocab_dict,text)
+    #update_unigrams(vocab_dict,text)
+
     return processing
 
 #doesn't consider words we've already known. compound words and/or similar words may be awko taco
@@ -142,11 +142,11 @@ def seed():
     vocab_vec, max_word_length = lvu.vocab_vector(lv, lang_vectors)
     vocab_dict = lvu.vocab_dict(max_word_length)
 
-    filepath = "preprocessed_texts/english/a_christmas_carol.txt"
+    filepath = "preprocessed_texts/english/alice-only-stream.txt"#a_christmas_carol.txt"
     aea = dict_explain_away(vocab_dict,max_word_length,filepath)
-    file = open("intermediate/processing_array_explain_away_results","w")
-    file.write(aea)
-    file.close()
+    #file = open("intermediate/processing_array_explain_away_results","w")
+    #file.write(aea)
+    #file.close()
 
     #now for the em
     #not necessary in seeding phase. 
