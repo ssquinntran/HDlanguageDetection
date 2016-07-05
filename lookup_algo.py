@@ -50,29 +50,34 @@ def dict_explain_away(vocab_dict,max_length,filepath="preprocessed_texts/english
     pads = " " * (20-num_padds)
     text += pads
     processing = []
-    i = 0
+    # make a list of disjoint tuples of (start_index, end_index)
+    processed_indices = []
+
     for i in range(0,(len(text)/20)*20):
         window = text[i:i+20]
-        #print window
+        assigned_indices = []
+        
         #theoretically less words than you think bc a lot of repeat words
         for j in range(len(vocab_dict)-1, -1,-1):
-
+            
             for k,v in vocab_dict[j].items():
                 windex = window.find(k)
-                if windex > -1:
-                    print k
+                if windex > -1 and k not in assigned_indices:
+                    assigned_indices  += [windex + l for l in range(0,len(k))]
+                    processed_indices.append((i + windex, i + windex + len(k)-1))
+
                     #vocab_dict[j][k] += 1
                     #word at the beginning
                     window = window[:windex] + window[windex+len(k):]
                     print window
-        #how lame
-        #if len(window) > 0:
-        #    processing += window[0]
+        processing += window
+
     # apparently case of 1 letter words implicitly handled
     # can do a count to keep frequencies consistent
     #update_unigrams(vocab_dict,text)
-
-    return processing
+    print processing
+    #print processed
+    return processed_indices, processing
 
 #doesn't consider words we've already known. compound words and/or similar words may be awko taco
 def hard_e_step(word,new_phrases):
