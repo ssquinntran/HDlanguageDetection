@@ -2,9 +2,9 @@ import numpy as np
 import string
 import collections
 import pickle
-from ..utils import random_idx as ri
-from ..utils import log_random_idx as lri
-from ..utils import log_lang_vectors as llv
+from utils import random_idx as ri
+from utils import log_random_idx as lri
+from utils import log_lang_vectors as llv
 from copy import deepcopy
 
 alphabet = string.lowercase+" "
