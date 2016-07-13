@@ -60,7 +60,6 @@ def dict_explain_away(vocab_dict,max_length,text):
     num_padds = len(text)%20
     pads = " " * (20-num_padds)
     text += pads
-    processing = []
     # make a list of disjoint tuples of (start_index, end_index)
     processed_indices = []
 
@@ -73,19 +72,12 @@ def dict_explain_away(vocab_dict,max_length,text):
             
             for k,v in vocab_dict[j].items():
                 windex = window.find(k)
-                if windex > -1 and k not in assigned_indices:
+                if windex > -1 and windex not in assigned_indices:
                     assigned_indices  += [windex + l for l in range(0,len(k))]
                     processed_indices.append((i + windex, i + windex + len(k)-1))
 
                     #vocab_dict[j][k] += 1
-                    #word at the beginning
-                    window = window[:windex] + window[windex+len(k):]
-                    #print window
-        processing.append(window)
-
-    #print processing
-    #print processed
-    return sorted(processed_indices), processing
+    return sorted(processed_indices)
 
 #doesn't consider words we've already known. compound words and/or similar words may be awko taco
 def hard_e_step(word,new_phrases):
@@ -157,10 +149,10 @@ def seed():
 
     filepath = "preprocessed_texts/english/alice-only-stream.txt"#a_christmas_carol.txt"
     text = read_file(filepath)
-    processed_indices, processing = dict_explain_away(vocab_dict,max_word_length,text)
+    processed_indices = dict_explain_away(vocab_dict,max_word_length,text)
     processed = tuples_to_text(processed_indices, text)
     print processed
-    #print processing
+    
 
     #file = open("intermediate/processing_array_explain_away_results","w")
     #file.write(aea)
