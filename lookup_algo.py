@@ -62,19 +62,19 @@ def dict_explain_away(vocab_dict,max_length,text):
     text += pads
     # make a list of disjoint tuples of (start_index, end_index)
     processed_indices = []
-
+    assigned_indices = []
     for i in range(0,(len(text)/20)*20):
         window = text[i:i+20]
-        assigned_indices = []
         
-        #theoretically less words than you think bc a lot of repeat words
+
         for j in range(len(vocab_dict)-1, -1,-1):
             
             for k,v in vocab_dict[j].items():
                 windex = window.find(k)
-                if windex > -1 and windex not in assigned_indices:
-                    assigned_indices  += [windex + l for l in range(0,len(k))]
-                    processed_indices.append((i + windex, i + windex + len(k)-1))
+                if windex > -1 and i+windex not in assigned_indices:
+                    print k
+                    assigned_indices += [i+windex+l for l in range(0,len(k))]
+                    processed_indices.append((i + windex, i + windex + len(k)))
 
                     #vocab_dict[j][k] += 1
     return sorted(processed_indices)
@@ -150,6 +150,7 @@ def seed():
     filepath = "preprocessed_texts/english/alice-only-stream.txt"#a_christmas_carol.txt"
     text = read_file(filepath)
     processed_indices = dict_explain_away(vocab_dict,max_word_length,text)
+
     processed = tuples_to_text(processed_indices, text)
     print processed
     
