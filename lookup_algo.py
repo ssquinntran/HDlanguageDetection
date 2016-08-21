@@ -49,10 +49,7 @@ def tuples_to_text(tuples, text):
     texted = ""
     for tup in tuples:
         word = text[tup[0]:tup[1]]
-        if word:
-            #print word
-            #print len(word)
-            texted += " " + word
+        texted += " " + word
     return texted
 
 # unioned windowing is way too slow.
@@ -73,8 +70,9 @@ def dict_explain_away(vocab_dict,max_length,text):
                 mask = " "*len(key)
                 duplicate = duplicate[:start] + mask + duplicate[start+len(key):]
                 processed_indices.append((start, start + len(key)))
-    print len(duplicate)
-    return sorted(processed_indices)
+    indices = [(pair[0],pair[1]) for pair in processed_indices if pair[0] < pair[1]]
+
+    return sorted(indices)
 
 #doesn't consider words we've already known. compound words and/or similar words may be awko taco
 def hard_e_step(word,new_phrases):
