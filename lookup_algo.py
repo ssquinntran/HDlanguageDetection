@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import numpy as np
 import string
@@ -47,36 +48,32 @@ def update_unigrams(vocab_array, text):
 def tuples_to_text(tuples, text):
     texted = ""
     for tup in tuples:
-        texted += " " + text[tup[0]:tup[1]]
+        word = text[tup[0]:tup[1]]
+        if word:
+            #print word
+            #print len(word)
+            texted += " " + word
     return texted
 
-
+# unioned windowing is way too slow.
+# empty strings added to processed_indices. idk why
 def dict_explain_away(vocab_dict,max_length,text):
-    
-    #unioned windows so text needs to know if window updated so text can pad with " "
-    #window of 20 letters
-    #add padding to fit window
     print len(text)
-    num_padds = len(text)%20
-    pads = " " * (20-num_padds)
-    text += pads
+    # text[:] does not make a new copy
+    duplicate = "%s" % text
+    #print id(text)
+    #print id(duplicate)
     # make a list of disjoint tuples of (start_index, end_index)
     processed_indices = []
-    assigned_indices = []
-    for i in range(0,(len(text)/20)*20):
-        window = text[i:i+20]
-        
 
-        for j in range(len(vocab_dict)-1, -1,-1):
-            
-            for k,v in vocab_dict[j].items():
-                windex = window.find(k)
-                if windex > -1 and i+windex not in assigned_indices:
-                    print k
-                    assigned_indices += [i+windex+l for l in range(0,len(k))]
-                    processed_indices.append((i + windex, i + windex + len(k)))
-
-                    #vocab_dict[j][k] += 1
+    for i in range(len(vocab_dict)-1, -1,-1):
+        for key in vocab_dict[i].keys():
+            starts = [match.start() for match in re.finditer(re.escape(key), duplicate)]
+            for start in starts:
+                mask = " "*len(key)
+                duplicate = duplicate[:start] + mask + duplicate[start+len(key):]
+                processed_indices.append((start, start + len(key)))
+    print len(duplicate)
     return sorted(processed_indices)
 
 #doesn't consider words we've already known. compound words and/or similar words may be awko taco
@@ -140,6 +137,7 @@ def hard_em_discover_words(processing,vocab_array,max_length,filepath="preproces
         else: #if already known word
             processed += word + " "
     return processed
+
 def seed():
     filepath = "preprocessed_texts/english/alice-only-spaced.txt"
     #lvu.initialize()
@@ -152,12 +150,10 @@ def seed():
     processed_indices = dict_explain_away(vocab_dict,max_word_length,text)
 
     processed = tuples_to_text(processed_indices, text)
-    print processed
-    
 
-    #file = open("intermediate/processing_array_explain_away_results","w")
-    #file.write(aea)
-    #file.close()
+    fwrite = open("intermediate/processed_dict_explain_away_results","w")
+    fwrite.write(processed)
+    fwrite.close()
 
     #now for the em
     #not necessary in seeding phase. 
