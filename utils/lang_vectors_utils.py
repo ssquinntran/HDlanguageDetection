@@ -104,18 +104,18 @@ def vocab_vector(lv, lang_vectors, filepath="preprocessed_texts/alice-only-space
     f.close()
     return vocab_vec, max_length
 #array with cluster size as index, the dictionary of words in that index
-def vocab_dict(max_word_length, filepath="preprocessed_texts/alice-only-spaced.txt"):
+def vocab(max_word_length, filepath="preprocessed_texts/alice-only-spaced.txt"):
     f = open(filepath, "r");
     text = f.read();
     text = text.split(" ")
     #text = ''.join([x for x in text if x in alphabet])[0:10000];
     #max word length is 20 letters lol
-    vocab_dict = [{} for i in range(0,max_word_length)]
+    array = [{} for i in range(0,max_word_length)]
 
     for word in text:
-        if word not in vocab_dict[len(word)-1].keys():
-            vocab_dict[len(word)-1][word] = 1
+        if word not in array[len(word)-1].keys():
+            array[len(word)-1][word] = 1
         else:
-            vocab_dict[len(word)-1][word] += 1
+            array[len(word)-1][word] += 1
     f.close()
-    return vocab_dict
+    return array
