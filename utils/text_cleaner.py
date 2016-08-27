@@ -12,17 +12,18 @@ import re
 from unidecode import unidecode
 
 include = string.lowercase
-#exclude = string.punctuation + string.whitespace + "\n\r"
-exclude = string.punctuation #+ "\n\r"
-#exclude.replace(" ", "");
+exclude = string.punctuation
+
 
 try:
-		if len(sys.argv)> 1 and len(sys.argv) < 3 or len(sys.argv)>3:
-				print "Usage: python script.py <inputFile.txt> <outputFile.txt>"
+		if len(sys.argv)> 1 and len(sys.argv) < 4 or len(sys.argv)>4:
+				print "Usage: python script.py <inputFile.txt> <outputFile.txt> <'space' or 'nospace'>"
 				sys.exit()
 		run = 1
 		inputfn = sys.argv[1]
 		outputfn = sys.argv[2]
+		with_space = sys.argv[3]
+
 except IndexError:
 		run = 0
 
@@ -63,8 +64,10 @@ def cleaner(s):
 						if num in word:
 								num_exist = 1
 				if lowercase_exist and not num_exist:
-						new_s += word
-
+						if with_space == "space":
+							new_s += " " + word
+						else:
+							new_s += word
 		# make all letters lowercase
 		new_s = new_s.lower()
 
