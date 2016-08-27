@@ -110,7 +110,7 @@ def run():
     # meaning matrix
     # https://radimrehurek.com/gensim/models/word2vec.html  ?????
     meaning_matrices = create_meaning_matrices(ldamodel, num_topics, topn, dictionary)
-    print meaning_matrices[0][0]
+    
     # need to fix configs to make working meaning matrices
     # token 2 id dictionary
     # print dictionary.token2id
@@ -118,4 +118,4 @@ def run():
     # was going to measure accuracy by multiplying or dot producting a
     # token vector with a meaning matrix
 
-run()
+# run()
