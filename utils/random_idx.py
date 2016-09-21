@@ -46,8 +46,12 @@ def save_components(save_encoding=False, save_word_dict=False, encoding=None, di
 
 def read_components(read_encoding):
     if read_encoding:
+        if not check_serialization(1):
+            return None
         return pickle.load(open("letter_encoding.p", "rb"))
     else:
+        if not check_serialization(0):
+            return None
         return pickle.load(open("word_dictionary.p", "rb"))
 
 def fetch_serialized_encoding():
