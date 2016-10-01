@@ -8,11 +8,83 @@ import string
 import utils
 import pandas as pd
 import os
+import pickle
 
 alphabet = string.lowercase + " "
 lang_dir = 'preprocessed_texts/'
 
 cluster_cache = {}
+
+
+
+k = 500
+N = 1000
+alphabet = string.lowercase + ' '
+
+
+def check_serialization(which_file):
+    if which_file == 1:
+        return os.path.isfile('letter_encoding.p')
+    else:
+        return os.path.isfile('word_dictionary.p')
+
+
+def make_serialization(make_encoding=False, make_word_dict=False):
+    if make_encoding:
+        one_hot_encoding = generate_letter_id_vectors(N, k)
+        pickle.dump(one_hot_encoding, open("letter_encoding.p", "wb"))
+    if make_word_dict:
+        word_dict = {}
+        pickle.dump(word_dict, open("word_dictionary.p", "wb"))
+
+
+def save_components(save_encoding=False, save_word_dict=False, encoding=None, dictionary=None):
+    if save_encoding:
+        pickle.dump(encoding, open("letter_encoding.p", "wb"))
+    if save_word_dict:
+        pickle.dump(dictionary, open("word_dictionary.p", "wb"))
+
+def read_components(read_encoding):
+    if read_encoding:
+        if not check_serialization(1):
+            return None
+        return pickle.load(open("letter_encoding.p", "rb"))
+    else:
+        if not check_serialization(0):
+            return None
+        return pickle.load(open("word_dictionary.p", "rb"))
+
+def fetch_serialized_encoding():
+    if not check_serialization(1):
+        print "stepping into this case"
+        make_serialization(True, False)
+    encoding = read_components(True)
+    if not check_serialization(0):
+        make_serialization(False, True)
+    word_dict = read_components(False)
+    return encoding, word_dict
+
+
+def word_hypervec(word, alph=alphabet, N=N):
+    one_hot_encoding, word_dict = fetch_serialized_encoding()
+    if word in word_dict:
+        return word_dict[word]
+    hypervector = id_vector(N, word,alph, one_hot_encoding)
+    word_dict[word] = hypervector
+    save_components(save_word_dict=True, dictionary=word_dict)
+    return hypervector
+
+def stack_list(lst):
+    all_words = []
+    for word in lst:
+        all_words.append(word_hypervec(word))
+    return np.vstack(all_words)
+
+
+
+
+
+
 
 def generate_letter_id_vectors(N, k, alph=alphabet):
     # build row-wise k-sparse random index matrix
